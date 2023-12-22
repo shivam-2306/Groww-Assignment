@@ -64,7 +64,7 @@ const Checkout = () => {
   };
 
   const handleTransition = (event) => {
-    currStep.setState({Step:'Payment'})
+    currStep.setState({Step:'Confirmation'})
   
   }
 

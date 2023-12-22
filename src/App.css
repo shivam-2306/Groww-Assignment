@@ -6,3 +6,8 @@ body{
   padding: 0;
   font-family:  'Quicksand', sans-serif;
 }
+
+header {
+  position: sticky;
+  top: 0;
+}

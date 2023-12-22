@@ -1,0 +1,84 @@
+$activeColor: #4CAF50;
+$inactiveColor: #ccc;
+$circleSize: 30px;
+$smallCircleSize: 20px; // Adjusted size for inactive circles
+$largeCircleSize: 40px; // Adjusted size for active circles
+
+.progress-stepper {
+    display: flex;
+    align-items: center;
+    padding: 10px 50px;
+    position: sticky; 
+    top: 50px; 
+    background-color: #333;
+    // Apply padding to both sides
+     // Position relative for absolute positioning of line
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 0 0 0 0;
+}
+
+.circle {
+    width: $smallCircleSize; // Adjusted size for inactive circles
+    height: $smallCircleSize; // Adjusted size for inactive circles
+    border: 2px solid $inactiveColor; // Border for inactive circles
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.small-circle {
+    width: $smallCircleSize;
+    height: $smallCircleSize;
+}
+
+.label {
+    margin-top: 5px;
+    color: $inactiveColor;
+    position: relative;
+    bottom: -9px;
+}
+
+.active {
+    .circle {
+        width: $largeCircleSize; // Adjusted size for active circles
+        height: $largeCircleSize; // Adjusted size for active circles
+        background-color: black; // Background color for active circle
+        border: 2px solid black; // Border for active circle
+
+        img {
+            filter: invert(100%);
+        }
+    }
+
+    .label {
+        color: black;
+        font-weight: bold; // Bold font for active label
+        bottom: 0px;
+    }
+}
+
+.line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: $inactiveColor;
+    position: relative;
+    overflow: visible;
+    width: 10px;// Adjusted width for line
+    bottom: 15px; // Adjusted position for line
+
+    &.before-active {
+        background-color: black; // Change color of lines before the active circle
+    }
+}

@@ -1,0 +1,27 @@
+/* Header.css */
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: 20px 20px;
+    background-color: #333;
+    /* You can customize the background color */
+    color: white;
+    position: sticky;
+    top: 0;
+    /* You can customize the text color */
+}
+
+.logo img {
+    max-width: 50px;
+    /* You can adjust the max-width of the logo */
+    margin-right: 10px;
+    /* You can adjust the margin between logo and company name */
+}
+
+.company-name h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-family: "Space-Mono", monospace;
+    /* You can adjust the font size of the company name */
+}
