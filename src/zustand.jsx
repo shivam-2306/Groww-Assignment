@@ -17,5 +17,8 @@ export const cInfo = create(company);
 
 // const payment 
 
-// const orderList 
+const orderDetails = (set) => ({
+})
+
+export const orderList = create(orderDetails);
 

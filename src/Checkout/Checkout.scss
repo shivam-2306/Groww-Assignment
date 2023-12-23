@@ -1,4 +1,5 @@
 .wrapper{
+    z-index: 100;
     input:focus, button:focus {
         outline: none;
     }
@@ -163,4 +164,11 @@
 .input::placeholder {
     color: grey;
     /* Color of the placeholder text */
+}
+
+.loader {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
 }

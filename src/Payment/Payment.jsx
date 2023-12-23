@@ -1,5 +1,5 @@
 
-import "./Checkout.scss";
+import "./Payment.scss";
 import React, { useEffect, useState } from "react";
 import axios from "axios"
 import {motion} from 'framer-motion'
@@ -8,9 +8,13 @@ import pin from "../assets/pin.png";
 import  phone  from "../assets/phone.png";
 import { Card } from "@mui/material";
 import { currStep } from "../zustand";
+import { useNavigate } from "react-router-dom";
+import {orderList} from '../zustand'
 
 
-const Checkout = () => {
+const Payment = () => {
+  const navigate = useNavigate();
+  
   const [orderDetails, setOrderDetails] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [phoneNumberError, setPhoneNumberError] = useState('');
@@ -64,25 +68,43 @@ const Checkout = () => {
   };
 
   const handleTransition = (event) => {
-    currStep.setState({Step:'Confirmation'})
+    currStep.setState({ Step: 'Confirmation' })
+    navigate('/confirmation')
   
   }
 
-  useEffect(() => {
-    const fetchOrderDetails = async () => {
-      try {
-        const response = await axios.get(
-          "https://groww-intern-assignment.vercel.app/v1/api/order-details"
-        );
-        setOrderDetails(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error fetching order details:", error.message);
-      }
-    };
+   useEffect(() => {
+    // Get the value of orderList
+    const orderListData = orderList.getState();
 
-    fetchOrderDetails();
+    // Check if orderListData is not empty
+    if (orderListData.products) {
+      // Set orderDetails to the value of orderListData
+      setOrderDetails(orderListData);
+      console.log('this is stored'); console.table(orderListData)
+    } else {
+      // If it's empty, fetch data from the API
+      const fetchOrderDetails = async () => {
+        try {
+          const response = await axios.get(
+            "https://groww-intern-assignment.vercel.app/v1/api/order-details"
+          );
+
+          // Set the fetched data to orderDetails
+          setOrderDetails(response.data);
+          orderList.setState(response.data);
+          console.log('this is set'); console.table(orderList.getState())
+          
+        } catch (error) {
+          console.error("Error fetching order details:", error.message);
+        }
+      };
+
+      // Call the fetchOrderDetails function to initiate the fetch
+      fetchOrderDetails();
+    }
   }, []);
+
 
   const handleQuantityChange = (productId, newQuantity) => {
     newQuantity = Math.max(0, newQuantity);
@@ -98,7 +120,7 @@ const Checkout = () => {
 
 
   if (!orderDetails) {
-    return <p>Loading...</p>;
+    return <div></div>;
   }
 
   const { products } = orderDetails;
@@ -233,4 +255,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default Payment;

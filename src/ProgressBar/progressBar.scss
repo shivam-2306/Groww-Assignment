@@ -8,11 +8,40 @@ $largeCircleSize: 40px; // Adjusted size for active circles
     display: flex;
     align-items: center;
     padding: 10px 50px;
-    position: sticky; 
-    top: 50px; 
-    background-color: #333;
-    // Apply padding to both sides
-     // Position relative for absolute positioning of line
+            background-color: rgba(255, 255, 255, 0.7);
+
+}
+
+.line-wrapper {
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    /* Add this line */
+    justify-content: center;
+    /* Center the contents horizontally */
+    // align-items: center;
+    // /* Center the contents vertically */
+    // height: 2px; // Height of the line
+
+}
+
+.base-line {
+    position: absolute;
+    height: 2px;
+    background-color: #ccc; // Grey color for base line
+    width: 100%;
+    top: 50%;
+    margin-top: -1px;
+}
+
+.progress-line {
+    position: absolute;
+    height: 3px;
+    background-color: black; // Black color for progress line
+    width: 100%;
+    top: 0;
+    transform: scaleX(0);
+    transform-origin: left;
 }
 
 .step {
@@ -20,27 +49,22 @@ $largeCircleSize: 40px; // Adjusted size for active circles
     flex-direction: column;
     align-items: center;
     position: relative;
-    padding: 0 0 0 0;
 }
 
 .circle {
-    width: $smallCircleSize; // Adjusted size for inactive circles
-    height: $smallCircleSize; // Adjusted size for inactive circles
-    border: 2px solid $inactiveColor; // Border for inactive circles
+    width: $smallCircleSize;
+    height: $smallCircleSize;
+    border: 2px solid $inactiveColor;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
 
+
     img {
         width: 20px;
         height: 20px;
     }
-}
-
-.small-circle {
-    width: $smallCircleSize;
-    height: $smallCircleSize;
 }
 
 .label {
@@ -52,10 +76,10 @@ $largeCircleSize: 40px; // Adjusted size for active circles
 
 .active {
     .circle {
-        width: $largeCircleSize; // Adjusted size for active circles
-        height: $largeCircleSize; // Adjusted size for active circles
-        background-color: black; // Background color for active circle
-        border: 2px solid black; // Border for active circle
+        width: $largeCircleSize;
+        height: $largeCircleSize;
+        background-color: black;
+        border: 2px solid black;
 
         img {
             filter: invert(100%);
@@ -64,21 +88,8 @@ $largeCircleSize: 40px; // Adjusted size for active circles
 
     .label {
         color: black;
-        font-weight: bold; // Bold font for active label
+        font-weight: bold;
+        font-size: medium;
         bottom: 0px;
-    }
-}
-
-.line {
-    flex-grow: 1;
-    height: 2px;
-    background-color: $inactiveColor;
-    position: relative;
-    overflow: visible;
-    width: 10px;// Adjusted width for line
-    bottom: 15px; // Adjusted position for line
-
-    &.before-active {
-        background-color: black; // Change color of lines before the active circle
     }
 }

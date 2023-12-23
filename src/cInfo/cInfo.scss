@@ -1,27 +1,52 @@
-/* Header.css */
-
 .header {
     display: flex;
     align-items: center;
     padding: 20px 20px;
-    background-color: #333;
-    /* You can customize the background color */
-    color: white;
+    background-color: transparent;
+    display: flex;
     position: sticky;
     top: 0;
-    /* You can customize the text color */
+    left: 0;
+    width: 100%;
+    height: 50px;
+    transition: height 0.5s ease ;
+    background-color: transparent;
+    /* Add a smooth transition effect */
+
+}
+
+.header.sticking {
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    height: 15px;
+    padding: 10px;
+    /* Add a shadow to the header */
+    .logo img {
+        max-width: 20px;
+        margin-right: 1px;
+        /* Add a smooth transition effect */
+    }
+        .company-name h1 {
+            margin: 0;
+            font-size: 1rem;
+            font-family: "Space-Mono", monospace;
+            /* Add a smooth transition effect */
+        }
+
+
 }
 
 .logo img {
     max-width: 50px;
-    /* You can adjust the max-width of the logo */
     margin-right: 10px;
-    /* You can adjust the margin between logo and company name */
+    transition: all 0.5s ease ;
+    /* Add a smooth transition effect */
 }
 
 .company-name h1 {
     margin: 0;
     font-size: 2rem;
     font-family: "Space-Mono", monospace;
-    /* You can adjust the font size of the company name */
+    transition: all 0.5s ease ;
+    /* Add a smooth transition effect */
 }

@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import Search from "../assets/search-interface-symbol.png";
 import pin from "../assets/pin.png";
-import  phone  from "../assets/phone.png";
+import phone from "../assets/phone.png";
+import { orderList } from '../zustand';
 
 const Confirmation = () => {
     const containerRef = useRef(null);
@@ -20,18 +21,33 @@ const Confirmation = () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
         container.appendChild(renderer.domElement);
 
-        const imageUrls = [
-            Search, phone
-            // Add more image URLs as needed
-        ];
+        const createBorderTexture = (imageTexture, borderColor = 'black', borderWidth = 10) => {
+            const canvas = document.createElement('canvas');
+            canvas.width = imageTexture.image.width + borderWidth * 2;
+            canvas.height = imageTexture.image.height + borderWidth * 2;
+            const context = canvas.getContext('2d');
 
-        const textureLoader = new THREE.TextureLoader();
-        textureLoader.setCrossOrigin("Anonymous"); // Set crossOrigin to "Anonymous"
+            // Draw border
+            context.fillStyle = borderColor;
+            context.fillRect(0, 0, canvas.width, canvas.height);
 
-        const sectionCount = 6; // Set the desired number of cylinders
+            // Draw image in the center
+            context.drawImage(imageTexture.image, borderWidth, borderWidth);
+
+            return new THREE.CanvasTexture(canvas);
+        };
+
+       const imageUrls = orderListData.products.map((product) => product.image);
+
+       const textureLoader = new THREE.TextureLoader();
+        textureLoader.setCrossOrigin("Anonymous");
+
+        const sectionCount = 6; // Adjust as needed
         const sectionMaterials = Array.from({ length: sectionCount }, (_, index) => {
             const imageUrl = imageUrls[index % imageUrls.length];
-            return new THREE.MeshBasicMaterial({ map: textureLoader.load(imageUrl) });
+            const imageTexture = textureLoader.load(imageUrl);
+            const borderedTexture = createBorderTexture(imageTexture);
+            return new THREE.MeshBasicMaterial({ map: borderedTexture });
         });
 
         const sectionGeometries = Array.from({ length: sectionCount }, (_, index) => {

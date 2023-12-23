@@ -1,13 +1,44 @@
-body{
+/* App.scss */
+
+body {
   background-color: white;
-  color:#060741;
+  color: #060741;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family:  'Quicksand', sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 header {
   position: sticky;
   top: 0;
+}
+
+/* Styles for ProgressBar */
+.progress-bar-container {
+  margin-top: 2%;
+  /* Adjust the margin-top as a percentage of the viewport height */
+}
+
+/* Styles for Checkout */
+.checkout-container {
+  margin-top: 2%;
+  /* Adjust the margin-top as a percentage of the viewport height */
+}
+
+/* Styles for Confirmation */
+.confirmation-container {
+  margin-top: 2%;
+  /* Adjust the margin-top as a percentage of the viewport height */
+}
+
+/* Add media queries for specific screen sizes if needed */
+@media (max-width: 768px) {
+
+  .progress-bar-container,
+  .checkout-container,
+  .confirmation-container {
+    margin-top: 4%;
+    /* Adjust the margin-top for smaller screens */
+  }
 }
