@@ -215,11 +215,11 @@ const Checkout = () => {
         
         <motion.div className="totalCost">
           <h2>Detailed Summary</h2>
-          <div className="phone" style={{ display: 'flex', alignItems: 'center',  gap:20}}>
+          <div className="phone-screen" style={{ display: 'flex', alignItems: 'center',  gap:20}}>
             <img href={pin} alt="phone" style={{height:20, width:20, marginRight:-10}}/>
             <input className ="input" type="text" placeholder="+91 - " style={{background:"transparent", fontSize:18, color:'black', outline:"none", border:"none",borderBottom:'1px solid #00b386', paddingBottom:5, letterSpacing:1.5, width:130}} onChange={handlePhoneNumberChange} onKeyDown={handleEnterKeyPress}/>
           </div>
-          <div className="phone" style={{ display: 'flex', alignItems: 'center',  gap:20}}>
+          <div className="phone-screen" style={{ display: 'flex', alignItems: 'center',  gap:20}}>
             <img src={phone} alt="phone" style={{height:20, width:20, marginRight:-10}}/>
             <input className ="input" type="text" placeholder="+91 - " style={{background:"transparent", fontSize:18, color:'black', outline:"none", border:"none",borderBottom:'1px solid #00b386', paddingBottom:5, letterSpacing:1.5, width:130}} onChange={handlePhoneNumberChange} onKeyDown={handleEnterKeyPress}/>
           </div>

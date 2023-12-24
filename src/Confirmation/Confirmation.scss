@@ -68,14 +68,13 @@
 }
 
 :root {
-    min-height: 100vh;
     --purple: #800080;
         /* Example purple color */
         --violet: #8A2BE2;
         /* Example violet color */
         --pink: #FFC0CB;
         /* Example pink color */
-    --font-family: "Rubik", sans-serif;
+
     --font-weight-light: 400;
     --font-weight-regular: 500;
     --font-weight-bold: 700;
@@ -104,7 +103,8 @@
 // }
 
 .Confirmation {
-    font-family: var(--font-family);
+    font-family: var("Rubik",
+        sans-serif);
     background-color: var(--clr-background);
     margin: 0;
     overflow: hidden;
@@ -140,53 +140,46 @@
 .container {
     display: flex;
         flex-direction: row;
-        gap:0px;
+        gap: 0px;
         align-items: center;
-        padding-right:50px;
+        padding-right: 50px; // This will add to the width under content-box
         min-height: 100%;
-        width: 100vw; // Setting the container to take full viewport width
+        width: calc(100vw - 50px); // Subtract the padding from the width
         position: relative;
         z-index: 0;
-            overflow: hidden;
-
-        .container-text{
-
-            padding:140px 0px;
-            flex:1;
+        overflow: hidden;
+    
+        .container-text {
+            padding: 140px 0px;
+            flex: 1;
         }
-        .container-phone{
-            animation: 1s backwards shrinkin;
-            // flex:1;
-            // padding: 0px;
-            // z-index: 2000;
-            // height: 100%;
+    
+        .container-phone {
             overflow: visible;
         }
-
-
+    
         .container-text,
-            .container-phone {
-                
-                flex: 1; 
-               // This will allow these elements to expand and use available space
-        
-                @media screen and (min-width: 700px) {
-                    // Adjustments for larger screens if needed
-                }
+        .container-phone {
+            flex: 1;
+            // No width/height defined, so padding is not an issue here.
+    
+            @media screen and (min-width: 700px) {
+                // Your media queries
             }
-
-    @media screen and (min-width: 700px) {
-        flex-direction: row;
-        gap: 1em;
-    }
-
-    @media screen and (min-width: 1000px) {
-        gap: 2em;
-    }
-
-    @media screen and (min-width: 1200px) {
-        gap: 5em;
-    }
+        }
+    
+        @media screen and (min-width: 700px) {
+            flex-direction: row;
+            gap: 1em;
+        }
+    
+        @media screen and (min-width: 1000px) {
+            gap: 2em;
+        }
+    
+        @media screen and (min-width: 1200px) {
+            gap: 5em;
+        }
 
     &::after {
         content: "";
@@ -221,13 +214,13 @@
         }
     }
 
-    &-text {
-        padding: 0 2em 4em;
-        text-align: center;
-
-        @media screen and (min-width: 700px) {
-            text-align: left;
-        }
+        &-text {
+            padding: 0 2em 4em;
+            text-align: center;
+    
+            @media screen and (min-width: 700px) {
+                text-align: left;
+            }
 
         h1 {
             color: var(--clr-text-headline);
@@ -252,11 +245,12 @@
         }
     }
 
-    &-phone {
+     &-phone {
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 4em 0;
+        // No width/height defined, so padding is not an issue here.
     }
 }
 
@@ -559,7 +553,7 @@
     display: inline-block;
     position: relative;
     .magic-star{
-        --size: clamp(20px, 1.5vw, 30px);
+        --size: clamp(10px, 1.5vw, 20px);
         animation: scale 700ms ease forwards;
         display:block;
         height: var(--size);
@@ -567,11 +561,11 @@
         position: absolute;
         top: var(--star-top);
         width: var(--size);
-        .svg {
+        svg {
             animation: rotate 1000ms linear infinite;
             display: block;
-            opacity: 0.7;
-            .path {
+            opacity: 0.5;
+            path {
                 fill: var(--violet);
             }
 
@@ -582,8 +576,10 @@
 
      background: linear-gradient(to right, var(--purple), var(--violet), var(--pink), var(--purple));
         background-size: 200%;
+        background-clip: text;
      -webkit-background-clip: text;
      -webkit-text-fill-color: transparent;
      white-space: nowrap;
      font-weight: bold;
- }}
+ }
+}

@@ -33,8 +33,8 @@ for(const star of document.getElementsByClassName("magic-star")) {
   }, index++ * (interval / 3))
 }
     }, []);
-    // const orderListData = orderList.getState();
-    // const imageUrls = orderListData.products.map((product) => product.image);
+    const orderListData = orderList.getState();
+    const imageUrls = orderListData.products.map((product) => product.image);
 
     
     return (
@@ -66,7 +66,7 @@ for(const star of document.getElementsByClassName("magic-star")) {
                         <div className="phone-chat-msg__contact msg">
                             Here are the products you ordered.
                         </div>
-                      {/* <div className="phone-chat-msg__pics msg">
+                      <div className="phone-chat-msg__pics msg">
                             {imageUrls.map((url, index) => (
                                 <div 
                                     key={index} 
@@ -74,13 +74,13 @@ for(const star of document.getElementsByClassName("magic-star")) {
                                     style={{ backgroundImage: `url(${url})` }}
                                 ></div>
                             ))}
-                        </div> */}
+                        </div>
                         <div className="phone-chat-msg__me msg">
                             They will be delivered to you within 1-3 days.
                         </div>
                         <div className="phone-chat-msg__me msg">Hope you enjoy them</div>
                         <div className="phone-chat-msg__contact msg">
-                            Now let's talk some money. Our amazing products may have set your budget back, but you can get rewards on each purchase!
+                            Now let's talk some money. Our products may have slimmed your wallet, but they will definitely fill your heart.
                         </div>
                         <div className="msg">
                             <div className="phone-chat-offer">

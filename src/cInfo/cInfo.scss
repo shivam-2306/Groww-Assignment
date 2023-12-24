@@ -1,7 +1,7 @@
 .header {
     display: flex;
     align-items: center;
-    padding: 20px 20px;
+    padding: 20px 20px ;
     background-color: transparent;
     display: flex;
     position: sticky;
@@ -20,7 +20,7 @@
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     height: 15px;
-    padding: 10px;
+    padding: 10px 10px;
     /* Add a shadow to the header */
     .logo img {
         max-width: 20px;
