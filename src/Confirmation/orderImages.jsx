@@ -37,6 +37,8 @@ const Confirmation = () => {
             return new THREE.CanvasTexture(canvas);
         };
 
+        const orderListData = orderList.getState();
+
        const imageUrls = orderListData.products.map((product) => product.image);
 
        const textureLoader = new THREE.TextureLoader();

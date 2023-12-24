@@ -69,7 +69,7 @@ const Payment = () => {
 
   const handleTransition = (event) => {
     currStep.setState({ Step: 'Confirmation' })
-    navigate('/confirmation')
+    navigate('/chat')
   
   }
 

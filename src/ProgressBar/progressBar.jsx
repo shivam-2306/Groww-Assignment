@@ -92,7 +92,7 @@ const ProgressBar = () => {
         </div>
       </React.Fragment>
     ))}
-  </div>
+      </div>
 
   );
 };

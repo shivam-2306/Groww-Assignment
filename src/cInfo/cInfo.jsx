@@ -7,6 +7,7 @@ const Header = () => {
     const logo = cInfo((state) => state.logo);
     const headerRef = useRef(null);
 
+
     useEffect(() => {
         const header = headerRef.current;
 
@@ -32,6 +33,7 @@ const Header = () => {
             const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             const originalText = companyNameElement.innerText;
 
+
             let it = 0;
             const int = setInterval(() => {
                 companyNameElement.innerText = originalText.split("")
@@ -43,14 +45,15 @@ const Header = () => {
                     }).join("");
 
                 if (it > 9) clearInterval(int);
-                it += 1 / 3;
-            }, 30);
+                it += 1 / 5;
+            }, 50);
 
             return () => {
                 clearInterval(int);
             };
         }
     }, [cname]); // Include cname in the dependency array to react to changes in cname
+    
 
     return (
         <header className="header" ref={headerRef}>

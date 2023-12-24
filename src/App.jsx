@@ -1,7 +1,7 @@
 // App.js
 
 import React, { useState, useEffect } from 'react';
-import './App.scss'; // Import the SCSS file
+import './App.css'; // Import the SCSS file
 import Checkout from './Checkout/Checkout';
 import ProgressBar from './ProgressBar/progressBar';
 import { cInfo } from './zustand';
@@ -15,30 +15,36 @@ import ChatComponent from './Confirmation/Confirmation';
 function App() {
   const [count, setCount] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchCDetails = async () => {
-      try {
-        const response = await axios.get(
-          "https://groww-intern-assignment.vercel.app/v1/api/merchant-metadata"
-        );
-        var cname = response.data.merchantName;
-        var logo = response.data.merchantLogo;
-        var theme = {
-          background: response.data.theme['--background'],
-          foreground: response.data.theme['--foreground'],
-          primary: response.data.theme['--primary'],
-          fprimary: response.data.theme['--primary-foreground']
-        };
-        cInfo.setState({
-          name: cname,
-          logo: logo,
-          theme: theme
-        });
-        console.log(cInfo.getState());
-      } catch (error) {
-        console.error("Error fetching order details:", error.message);
-      }
+      // Check if 'name' is not present in cInfo state
+      const currentCInfo = cInfo.getState();
+
+        try {
+          const response = await axios.get(
+            "https://groww-intern-assignment.vercel.app/v1/api/merchant-metadata"
+          );
+          var cname = response.data.merchantName;
+          var logo = response.data.merchantLogo;
+          var theme = {
+            background: response.data.theme['--background'],
+            foreground: response.data.theme['--foreground'],
+            primary: response.data.theme['--primary'],
+            fprimary: response.data.theme['--primary-foreground']
+          };
+          cInfo.setState({
+            name: cname,
+            logo: logo,
+            theme: theme
+          });
+          console.log(cInfo.getState());
+        } catch (error) {
+          console.error("Error fetching order details:", error.message);
+        } finally {
+          setIsLoading(false);
+        }
     };
 
     fetchCDetails();
@@ -48,6 +54,7 @@ function App() {
     <Router>
       <div>
         {/* ProgressBar and CInfo components always stay on top */}
+        {!isLoading && <div>
        <Header />
         <ProgressBar /> 
         {/* <CInfo /> */}
@@ -62,8 +69,10 @@ function App() {
 
             {/* Default route for / (and /checkout) */}
           </Routes>
+          </div>
+          </div>}
         </div>
-      </div>
+
     </Router>
   );
 }

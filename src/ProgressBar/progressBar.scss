@@ -4,11 +4,13 @@ $circleSize: 30px;
 $smallCircleSize: 20px; // Adjusted size for inactive circles
 $largeCircleSize: 40px; // Adjusted size for active circles
 
+
 .progress-stepper {
     display: flex;
     align-items: center;
-    padding: 10px 50px;
-            background-color: rgba(255, 255, 255, 0.7);
+    position: relative;
+    z-index:1;
+    padding: 0px 50px;
 
 }
 
