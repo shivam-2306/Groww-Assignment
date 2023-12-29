@@ -1,0 +1,420 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+
+:root {
+
+    --Linear-gradient: hsl(249, 99%, 64%) to hsl(278, 94%, 30%);
+    --red-input-errors: hsl(0, 100%, 66%);
+    --white: hsl(0, 0%, 100%);
+    --light-grayish-violet: hsl(270, 3%, 87%);
+    --dark-grayish-violet: hsl(279, 6%, 55%);
+    --very-dark-violet: hsl(278, 68%, 11%);
+    --blue: hsl(249, 99%, 64%);
+
+    --font-family: 'Space Grotesk', sans-serif;
+}
+
+.card-container,
+.card-container>* {
+    font-family: 'Space Grotesk', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+  .attribution {
+      font-size: 11px;
+      text-align: center;
+  }
+
+  .attribution a {
+      color: hsl(228, 45%, 44%);
+  }
+
+
+
+/* error messages */
+
+.error {
+    outline-color: var(--red-input-errors) !important;
+    color: var(--red-input-errors);
+}
+
+.error-message {
+    color: var(--red-input-errors);
+}
+
+.error-message::after {
+    content: "Cant't be blank";
+    color: var(--Red);
+    margin-top: .2rem;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.error-number {
+    color: var(--red-input-errors);
+}
+
+.error-number::after {
+    content: "Wrong format, letters only";
+    color: var(--Red);
+    margin-top: .2rem;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.error-letter {
+    color: var(--red-input-errors);
+}
+
+.error-letter::after {
+    content: "Wrong format, numbers only";
+    color: var(--Red);
+    margin-top: .2rem;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.error-minimum {
+    color: var(--red-input-errors);
+}
+
+.error-minimum::after {
+    content: "Needs a mimimum of 16 characters";
+    color: var(--Red);
+    margin-top: .2rem;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.correct {
+    outline-color: green;
+}
+
+.correct::after {
+    content: "Correct";
+    color: green;
+    margin-top: 0;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.month-over {
+    color: var(--red-input-errors);
+}
+
+.month-over::after {
+    content: "Can't be more than 12";
+    color: var(--Red);
+    margin-top: .2rem;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.valid-year {
+    color: var(--red-input-errors);
+}
+
+.valid-year::after {
+    content: "Has to be more than 2023 & no more 2027";
+    color: var(--Red);
+    margin-top: .2rem;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+
+
+/* structure */
+
+body {
+    min-height: 100vh;
+}
+
+
+.card-container {
+    display: flex;
+    align-items: center;
+}
+
+
+/* Left Section */
+
+.left-section {
+    width: 40%;
+    background-image: url(./assets/bg-main-desktop.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+    min-height: 100vh;
+}
+
+.cards {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    transform: translate(-50%, -50%);
+
+}
+
+.front-card {
+    position: relative;
+    transform: translate(-100px);
+    box-shadow: -1px 58px 400px -84px rgba(0, 0, 0, 0.75);
+
+}
+
+.card-logo {
+    position: absolute;
+    top: 1.7rem;
+    left: 1.7rem;
+}
+
+#number {
+    position: absolute;
+    color: var(--white);
+    bottom: 5rem;
+    left: 1.7rem;
+    letter-spacing: 2px;
+}
+
+.card-info {
+    position: absolute;
+    bottom: 1.7rem;
+    left: 1.7rem;
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    right: 3rem;
+}
+
+.back-card {
+    position: relative;
+    box-shadow: -1px 58px 400px -84px rgba(0, 0, 0, 0.75);
+}
+
+#cvc {
+    position: absolute;
+    right: 3.5rem;
+    top: 7rem;
+    color: var(--white);
+}
+
+/* Right section */
+
+.right-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+form {
+    display: grid;
+    gap: 1em;
+    width: 450px;
+}
+
+form label {
+    text-transform: uppercase;
+    font-size: 15px;
+    color: var(--very-dark-violet);
+    font-weight: 500;
+}
+
+form input {
+    border: 1px solid var(--light-grayish-violet);
+    height: 2em;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 18px;
+    padding: 1.3em;
+}
+
+form input:focus {
+    outline-color: var(--blue);
+}
+
+form input::placeholder {
+    padding: 0.1em;
+    font-size: 18px;
+    color: var(--dark-grayish-violet);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.grid-1,
+.grid-2,
+.grid-3,
+#card_date {
+    display: grid;
+    grid: 1fr;
+    gap: 0.5em;
+}
+
+button {
+    background-color: var(--very-dark-violet);
+    color: var(--white);
+    font-size: 18px;
+    padding: 1.2em 5em;
+    font-weight: 500;
+    border-radius: 10px;
+    margin-top: 2em;
+    cursor: pointer;
+}
+
+.card-information {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2em;
+}
+
+.two-inp {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6em;
+}
+
+/* Thank you section */
+
+.thank-you {
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.8em;
+}
+
+.thank-you h1 {
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.thank-you p {
+    font-size: 18px;
+    color: var(--dark-grayish-violet);
+    font-weight: 500;
+}
+
+.thank-you button {
+    width: 100%;
+}
+
+/* Large Ipad version */
+@media screen and (max-width: 1200px) {
+
+    .back-card,
+    .front-card,
+    .back-card img,
+    .front-card img {
+        width: 300px;
+    }
+
+    .card-logo {
+        width: 50px !important;
+    }
+
+    #number {
+        font-size: 1.1rem;
+        bottom: 4rem;
+    }
+
+    #cvc {
+        top: 43%;
+        right: 12%;
+    }
+}
+
+/* small ipad version */
+
+@media screen and (max-width:900px) {
+
+    .back-card,
+    .front-card,
+    .back-card img,
+    .front-card img {
+        width: 290px;
+    }
+
+    .cards {
+        left: 50%;
+        top: 50%;
+        gap: 2em;
+    }
+}
+
+/* mobile version */
+
+@media screen and (max-width:750px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .back-card,
+    .front-card,
+    .back-card img,
+    .front-card img {
+        width: 260px;
+    }
+
+    .card-logo {
+        width: 30px !important;
+    }
+
+    #number {
+        font-size: .9rem;
+        bottom: 3.5rem;
+    }
+
+    .left-section {
+        width: 100%;
+        min-height: 30vh;
+        background-image: url(./assets/bg-main-mobile.png);
+    }
+
+    .cards {
+        flex-direction: column-reverse;
+        left: 61%;
+        top: 60%;
+        gap: 0;
+    }
+
+    .back-card {
+        transform: translateY(70px);
+    }
+
+    .front-card {
+        z-index: 100;
+    }
+
+    .right-section {
+        margin-top: 6em;
+    }
+
+    .card-info span {
+        font-size: 12px;
+    }
+
+    .card-info {
+        right: 2rem;
+    }
+
+    form {
+        width: 90%;
+    }
+
+}
+
+.hidden {
+    display: none;
+}

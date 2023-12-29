@@ -9,7 +9,7 @@ const progressStep = (set) => ({
 export const currStep = create(progressStep);
 
 const company = (set) => ({
-    name: 'groww', logo: '', theme: [{ background:'white', foreground:'', primary:'', fprimary:'' }]
+    name: 'groww', logo: '', theme: [{ background:'black', foreground:'', primary:'', fprimary:'' }]
 
 })
 

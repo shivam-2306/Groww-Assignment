@@ -2,11 +2,13 @@ import React from 'react';
 import './ProgressBar.scss';
 import { motion } from 'framer-motion';
 import { currStep } from '../zustand'
+import { IonIcon } from '@ionic/react';
+import {card, cart, bagCheck} from 'ionicons/icons'
 
 const steps = [
-  { label: 'Checkout', icon: 'checkout-icon.png' },
-  { label: 'Payment', icon: 'payment-icon.png' },
-  { label: 'Confirmation', icon: 'confirmation-icon.png' },
+  { label: 'Checkout', icon: cart },
+  { label: 'Payment', icon: card },
+  { label: 'Confirmation', icon: bagCheck},
 ];
 
 const ProgressBar = () => {
@@ -31,12 +33,12 @@ const ProgressBar = () => {
   const circleAnimation = (index) => ( {
     inactive: { 
       scale: 0.83, 
-      borderColor:index < activeIndex ? '#000000' : '#ccc',
+      borderColor:index < activeIndex ? 'var(--primary)' : 'var(--foreground)',
       transition: { duration: 1 } // Slowed down transition
     },
     active: { 
       scale: 1.2, // Slightly larger to give a bold effect
-      borderColor: '#000000', 
+      borderColor: 'var(--primary-foreground)', 
       transition: { type: 'spring', stiffness: 100,damping: 5,  duration: 1, delay: index==0 ? 0 : 1 } // Slowed down transition
     },
   });
@@ -44,13 +46,13 @@ const ProgressBar = () => {
   // Animation for the label
   const labelAnimation = (index) => ({
     inactive: { 
-      color:index < activeIndex ? '#000000' : '#ccc', 
+      color:index < activeIndex ? 'var(--primary)' : 'var(--foreground)', 
       fontWeight: 'normal',
       fontSize: '0.8rem',
       transition: { duration: 1 } // Slowed down transition
     },
     active: { 
-      color: '#000000', 
+      color: 'var(--primary)', 
       fontWeight: 'bold',
       fontSize: '1rem',
       transition: { duration: 1 , delay: index==0 ? 0 : 1} // Slowed down transition
@@ -81,7 +83,7 @@ const ProgressBar = () => {
             variants={circleAnimation(index)}
             initial="inactive"
             animate={step.label === activeStep ? 'active' : 'inactive'}>
-            {step.label === activeStep ? <img src={step.icon} alt={step.label} /> : null}
+            {step.label === activeStep ? <IonIcon icon={step.icon} style={{color:'var(--primary-foreground)', fontSize:'2em' }} /> : null}
           </motion.div>
           <motion.div className="label"
             variants={labelAnimation(index)}

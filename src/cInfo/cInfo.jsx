@@ -8,23 +8,28 @@ const Header = () => {
     const headerRef = useRef(null);
 
 
-    useEffect(() => {
-        const header = headerRef.current;
+   useEffect(() => {
+    let debounceTimer;
+    const header = headerRef.current;
 
-        const handleScroll = () => {
-            if (window.scrollY > 20) { // Adjust the 20px offset as needed
+    const handleScroll = () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            if (window.scrollY) {
                 header.classList.add("sticking");
             } else {
                 header.classList.remove("sticking");
             }
-        };
+        }, 5); // 100ms debounce time
+    };
 
-        window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []); // Empty dependency array ensures this effect runs only once
+    return () => {
+        window.removeEventListener('scroll', handleScroll);
+        clearTimeout(debounceTimer);
+    };
+}, []);// Empty dependency array ensures this effect runs only once
 
     useEffect(() => {
         const companyNameElement = document.querySelector("#companyName");
@@ -56,7 +61,7 @@ const Header = () => {
     
 
     return (
-        <header className="header" ref={headerRef}>
+        <header className="header glass" ref={headerRef}>
             <div className="logo">
                 {/* You can replace the image source with your actual logo */}
                 <img src={logo} alt="Company Logo" />

@@ -1,0 +1,118 @@
+body{
+  margin:0;
+  padding: 0;
+  height:100%;
+  width: 100%;
+}
+.p_wrapper {
+    display: flex;
+    min-height: 100vh; // Set minimum height to 100% of the viewport height
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+
+    @media(max-width:1200px){
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap:30px;
+        height: 5vh;
+    }
+    .left {
+      flex: 70%;
+      width: 100%;
+    }
+  
+    .right {
+      flex: 30%;
+      width: 100%;
+      height: auto;
+      @media (min-width:1251px) {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 10px;
+        right: 0;
+      }
+      
+      background-color: var(--background-color);
+  
+      .right__wrapper {
+        padding: 5px 10px;
+        background: linear-gradient(var(--primary-lighter), var(--primary), var(--primary-darker));
+        color: var(--primary-foreground); //add primary-color
+        position: -webkit-sticky;
+        position: sticky;
+        top: 10px;
+        right: 0;
+        width: 90%;
+        margin: auto;
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        max-height: auto;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(188, 245, 147, 0.8);
+  
+        .mid__elements,
+        .p_header {
+          padding: 2px 2px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+  
+          button {
+            border: none;
+            background-color: transparent;
+            color: #00b386;
+            border-radius: 0;
+            border-bottom: 1px solid #00b386 30px;
+            cursor: pointer;
+          }
+        }
+  
+        hr {
+          height: 1px;
+          background-color: #00b386;
+          margin: 10px 60px;
+          width: calc(100% - 120px);
+        }
+      }
+  
+      button {
+        background-color: #00b386;
+        color: white;
+        margin-bottom: 20px;
+      }
+    }
+  
+    .expanded__List {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      .product__Images {
+        display: flex;
+        overflow: hidden;
+        width: auto;
+        gap: 20px;
+  
+        img {
+          width: 100px;
+          height: 100px;
+          object-fit: contain;
+          transition: transform 0.3s ease;
+        }
+  
+        button {
+          background-color: transparent;
+          color: #00b386;
+          border: none;
+          outline: none;
+        }
+      }
+    }
+  }
+  

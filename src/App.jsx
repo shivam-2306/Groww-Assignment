@@ -16,16 +16,20 @@ function App() {
   const [count, setCount] = useState(0);
   const [progress, setProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [theme, setTheme] = useState('white');
+
+    var currentCInfo = cInfo.getState();
+  var b = currentCInfo.theme.background;
 
   useEffect(() => {
     const fetchCDetails = async () => {
       // Check if 'name' is not present in cInfo state
-      const currentCInfo = cInfo.getState();
 
         try {
           const response = await axios.get(
             "https://groww-intern-assignment.vercel.app/v1/api/merchant-metadata"
           );
+          const root = document.documentElement;
           var cname = response.data.merchantName;
           var logo = response.data.merchantLogo;
           var theme = {
@@ -34,6 +38,10 @@ function App() {
             primary: response.data.theme['--primary'],
             fprimary: response.data.theme['--primary-foreground']
           };
+          root.style.setProperty('--background-color', theme.background);
+          root.style.setProperty('--foreground', theme.foreground);
+          root.style.setProperty('--primary', theme.primary);
+          root.style.setProperty('--primary-foreground', theme.fprimary);
           cInfo.setState({
             name: cname,
             logo: logo,
@@ -44,15 +52,17 @@ function App() {
           console.error("Error fetching order details:", error.message);
         } finally {
           setIsLoading(false);
+          b= theme.background;
         }
     };
 
     fetchCDetails();
   }, []);
 
+
   return (
     <Router>
-      <div>
+      <div className="background">
         {/* ProgressBar and CInfo components always stay on top */}
         {!isLoading && <div>
        <Header />
@@ -72,7 +82,6 @@ function App() {
           </div>
           </div>}
         </div>
-
     </Router>
   );
 }

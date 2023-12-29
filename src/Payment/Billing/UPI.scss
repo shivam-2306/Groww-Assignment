@@ -1,0 +1,51 @@
+.upi-container {
+    width: 80%;
+    color:#00b386;
+    margin:4rem;
+  }
+  
+  .accordion {
+    border: 1px solid #00b386;
+    margin-bottom: 30px;
+    padding:10px 20px;
+    border-radius: 20px;
+  }
+  
+  .accordion-header {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap:20px;
+    cursor: pointer;
+    font-size: 20px;
+    background-color: transparent;
+    img{
+        height:50px;
+        width: 70px;
+        object-fit: contain;
+        background: transparent;
+    }
+  }
+  
+  .accordion-content {
+    
+    input{
+    font-size: 18px;
+    padding:10px 20px;
+    color:grey;
+    width: 80%;
+    border-radius: 20px;
+    border: none;
+    background-color: #fff;
+    }
+  }
+  .accordion-content input::placeholder {
+    color: #9a9a9a; // Change to your desired placeholder text color
+  }
+  
+  .open {
+    .accordion-content {
+      display: block;
+    }
+  }
+  

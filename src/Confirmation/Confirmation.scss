@@ -105,9 +105,9 @@
 .Confirmation {
     font-family: var("Rubik",
         sans-serif);
-    background-color: var(--clr-background);
+    background-color: var(--background);
     margin: 0;
-    overflow: hidden;
+
 
 
     &::before {
@@ -119,7 +119,7 @@
         height: 70%;
         background-image: linear-gradient(to bottom,
                 var(--clr-gradient-one),
-                var(--clr-gradient-two));
+                var(--primary) 70%);
         border-bottom-right-radius: 9999em;
         border-bottom-left-radius: 9999em;
         transition: height 200ms ease, width 200ms ease, left 200ms ease;
@@ -140,11 +140,8 @@
 .container {
     display: flex;
         flex-direction: row;
-        gap: 0px;
         align-items: center;
-        padding-right: 50px; // This will add to the width under content-box
-        min-height: 100%;
-        width: calc(100vw - 50px); // Subtract the padding from the width
+        min-height: 100%; // Subtract the padding from the width
         position: relative;
         z-index: 0;
         overflow: hidden;
@@ -156,6 +153,8 @@
     
         .container-phone {
             overflow: visible;
+            max-width:40%;
+            min-width: 500px;
         }
     
         .container-text,
@@ -178,7 +177,6 @@
         }
     
         @media screen and (min-width: 1200px) {
-            gap: 5em;
         }
 
     &::after {
@@ -191,10 +189,10 @@
         height: 20%;
         background-image: linear-gradient(to bottom,
                 var(--clr-gradient-one),
-                var(--clr-gradient-two));
+                var(--primary));
         border-top-left-radius: 9999em;
         border-top-right-radius: 9999em;
-        opacity: 0.025;
+        opacity: 0.05;
         transition: height 200ms ease 1s, width 200ms ease 1s, left 200ms ease 1s;
 
         @media screen and (min-width: 1000px) {
@@ -204,13 +202,13 @@
 
         @media screen and (min-width: 1200px) {
             height: 85%;
-            opacity: 0.035;
+            opacity: 0.05;
         }
 
         @media screen and (min-width: 1400px) {
             width: 30em;
             height: 85%;
-            opacity: 0.035;
+            opacity: 0.05;
         }
     }
 
@@ -223,7 +221,7 @@
             }
 
         h1 {
-            color: var(--clr-text-headline);
+            color: var(--foreground);
             font-size: 2.175em;
             font-weight: var(--font-weight-bold);
         }
@@ -256,6 +254,7 @@
 
 .phone {
     display: flex;
+    left: -50px;
     flex-direction: column;
     width: 15.625em;
     height: 31.25em;
@@ -273,8 +272,8 @@
         align-items: center;
         padding: 1.25em 0.75em 0.75em;
         background-image: linear-gradient(to left,
-                var(--clr-gradient-one),
-                var(--clr-gradient-two));
+                var(--primary),
+                var(--clr-gradient-one) 60%);
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         box-shadow: var(--shadow-msg);
@@ -323,7 +322,7 @@
         }
 
         &-contact {
-            color: var(--clr-text-subheading);
+            color: var(--primary-foreground);
             font-size: 0.5em;
             font-weight: var(--font-weight-light);
             flex-grow: 1;
@@ -460,12 +459,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: var(--clr-white);
+            color: var(--primary-foreground);
             font-size: 0.575em;
             font-weight: var(--font-weight-light);
             background-image: linear-gradient(to right,
-                    var(--clr-gradient-one),
-                    var(--clr-gradient-two));
+                    var(--primary) 60%,
+                    var(--clr-gradient-one));
             border-radius: 7px;
             border-bottom-left-radius: 3px;
             max-width: 75%;

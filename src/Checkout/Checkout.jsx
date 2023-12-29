@@ -4,13 +4,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios"
 import {motion} from 'framer-motion'
 import Search from "../assets/search-interface-symbol.png";
-import pin from "../assets/pin.png";
-import  phone  from "../assets/phone.png";
-import { Card } from "@mui/material";
 import { currStep } from "../zustand";
 import { useNavigate } from "react-router-dom";
-import {orderList} from '../zustand'
-
+import { orderList } from '../zustand'
+import chroma from "chroma-js";
+import { IonIcon } from "@ionic/react";
+import { cart, call, pin } from 'ionicons/icons';
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -20,6 +19,24 @@ const Checkout = () => {
   const [phoneNumberError, setPhoneNumberError] = useState('');
    const [promoCode, setPromoCode] = useState('');
   const [promoCodeStatus, setPromoCodeStatus] = useState('');
+
+const SetColor = () => { const root = document.documentElement;
+const styles = getComputedStyle(root);
+  var primaryColor = styles.getPropertyValue('--primary').trim();
+  if (primaryColor) {
+    primaryColor = chroma(primaryColor);
+    let LighterColor = primaryColor.brighten(1).css(); // slightly brighter
+    console.log('light'+ LighterColor)//let muchLighterColor = primaryColor.brighten(3).css(); // much brighter
+    let DarkerColor = primaryColor.darken(1).css(); // slightly darker
+    //let muchDarkerColor = primaryColor.darken(3).css();
+    // Set new shades as CSS variables
+    document.documentElement.style.setProperty('--primary-lighter', LighterColor);
+    //document.documentElement.style.setProperty('--primary-much-lighter', muchLighterColor);
+    document.documentElement.style.setProperty('--primary-darker', DarkerColor);
+    //document.documentElement.style.setProperty('--primary-much-darker', muchDarkerColor);}
+  }
+  }
+  
 
   const handlePromoCodeChange = (event) => {
     const inputPromoCode = event.target.value;
@@ -73,8 +90,11 @@ const Checkout = () => {
   
   }
 
+
+
    useEffect(() => {
-    // Get the value of orderList
+     // Get the value of orderList
+     SetColor();
     const orderListData = orderList.getState();
 
     // Check if orderListData is not empty
@@ -127,20 +147,15 @@ const Checkout = () => {
   const Variants = {
     hover: {
       scale:1.05,
-      backgroundColor:'#00b386',
-      color:'white', // Background color on hover
+      backgroundColor: 'var(--primary)',
+      color:'var(--primary-foreground)', // Background color on hover
     },
     tap: {
-        scale:0.99,
-        backgroundColor:'#00b386',// Background color on tap/click
+      scale: 0.99,
+      borderColor: 'var(--primary-foreground)',
+        backgroundColor:'var(--primary)',// Background color on tap/click
     },
   };
-  const CardVar = {
-    hover: {
-        boxShadow: '0 4px 8px 0 rgba(0, 179, 134, 0.2), 0 6px 20px 0 rgba(0, 179, 134, 0.19)',
-        scale:1.01,
-      },
-  }
   // Calculate total cost based on the quantity and price of each product
   const totalCost = products.reduce(
     (total, product) => total + product.price * product.quantity,
@@ -151,30 +166,44 @@ const Checkout = () => {
     0
   );
 
+  const handleOnMouseMove = (e) => {
+    for (const product of document.querySelectorAll('.productWrapper')) {
+      const rect = product.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      product.style.setProperty('--x', `${x}px`);
+      product.style.setProperty('--y', `${y}px`);
+    }
+
+  }
+
   return (
     <motion.div className="wrapper">
-      <h1>Shopping Cart</h1>
-      <hr />
       
       <motion.div className="orderSummary">
-        <div className="orderList">
-        <h2>Order Summary</h2>
+        <div className="orderList" onMouseMove={(event)=>(handleOnMouseMove(event))}>
+          <div className="icon">
+            <IonIcon icon={cart} style= {{color: 'var(--foreground)', position: 'relative', fontSize:'5em'}} />
+        </div>
         {products.length === 0 ? (
             <div className="Empty" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'column' , gap:20}}>
             <h2>Oops! Your Cart seems to be empty!!</h2>
             <img src={Search} alt="Search" style={{ width: 100, height: 100 }} />
           </div>
           
-    ) : (
+          ) : (
+              <div>
           <ul>
             {products.map((product) => (
                 
                   
-                <motion.div className="productWrapper" variants={CardVar} whileHover="hover" key={product.id}>
-                  <img
+              <div className="productWrapper" >
+                <div className="product-border"></div>
+                <div className="product-content">
+                  <div className="image-wrapper"><img
                     src={product.image}
                     alt={product.title}
-                  />
+                  /></div>
                   <p className="Title">
                       <b>{product.title}</b>
                       <br />
@@ -182,9 +211,10 @@ const Checkout = () => {
                       <br />
                       Product ID: {product.id}
                     </p>
-                  <motion.div className="quantity">
+                  <div className="quantity">
                     <motion.button 
                     variants={Variants}
+                    className="glass"
                       onClick={() =>
                         handleQuantityChange(product.id, product.quantity - 1)
                       }
@@ -194,8 +224,10 @@ const Checkout = () => {
                       -
                     </motion.button>
                     <span>{product.quantity}</span>
-                    <motion.button
-                        variants={Variants}
+                  <motion.button
+                    className="glass"
+                      variants={Variants}
+                      
                       onClick={() =>
                         handleQuantityChange(product.id, product.quantity + 1)
                       }
@@ -204,26 +236,28 @@ const Checkout = () => {
                     >
                       +
                     </motion.button>
-                  </motion.div>
-                </motion.div>
+                  </div>
+                  </div>
+                </div>
               
             
             ))}
               
-          </ul>)}
+          </ul>
+          </div>)}
         </div>
         
         <motion.div className="totalCost">
           <h2>Detailed Summary</h2>
           <div className="phone-screen" style={{ display: 'flex', alignItems: 'center',  gap:20}}>
-            <img href={pin} alt="phone" style={{height:20, width:20, marginRight:-10}}/>
+            <IonIcon icon={pin} style={{height:20, width:20, marginRight:-10, color: 'var(--primary-foreground'}}/>
             <input className ="input" type="text" placeholder="+91 - " style={{background:"transparent", fontSize:18, color:'black', outline:"none", border:"none",borderBottom:'1px solid #00b386', paddingBottom:5, letterSpacing:1.5, width:130}} onChange={handlePhoneNumberChange} onKeyDown={handleEnterKeyPress}/>
           </div>
           <div className="phone-screen" style={{ display: 'flex', alignItems: 'center',  gap:20}}>
-            <img src={phone} alt="phone" style={{height:20, width:20, marginRight:-10}}/>
+            <IonIcon icon={call} alt="phone" style={{height:20, width:20, marginRight:-10}}/>
             <input className ="input" type="text" placeholder="+91 - " style={{background:"transparent", fontSize:18, color:'black', outline:"none", border:"none",borderBottom:'1px solid #00b386', paddingBottom:5, letterSpacing:1.5, width:130}} onChange={handlePhoneNumberChange} onKeyDown={handleEnterKeyPress}/>
           </div>
-      {phoneNumberError && <div style={{ color: phoneNumberError.includes('added') ? 'green' : 'red' }}>{phoneNumberError}</div>}
+      {phoneNumberError && <div style={{ color: phoneNumberError.includes('added') ? 'green' : 'red' , fontWeight: 'bold'}}>{phoneNumberError}</div>}
           <div className="subtotal">
             <h4>Cart total: </h4>
             <span>$ {totalCost.toFixed(2)}</span>
@@ -237,13 +271,13 @@ const Checkout = () => {
            
              <input type="search" id="promoCode" className="promoInput" placeholder="Promo code" style={{letterSpacing:1}} value={promoCode}
           onChange={handlePromoCodeChange} onKeyDown={applyPromoCode}/></div>
-      {promoCodeStatus && <div style={{ color: promoCodeStatus.includes('Invalid') ? 'red' : 'green' }}>{promoCodeStatus}</div>}
+      {promoCodeStatus && <div style={{ color: promoCodeStatus.includes('Invalid') ? 'red' : 'green', fontWeight: 'bold' }}>{promoCodeStatus}</div>}
 
           <div className="Grandtotal" >
             <h4>Grand total ({totalCount} items): </h4>
             <span>$ {(totalCost + 5.99).toFixed(2)}</span>
           </div>
-          <motion.button className="proceed" whileHover={{scale:1.02}} whileTap={{scale:0.99}} onClick ={handleTransition}>
+          <motion.button className="proceed glass" whileHover={{scale:1.02}} whileTap={{scale:0.99}} onClick ={handleTransition}>
               Proceed to buy
           </motion.button>
         </motion.div>

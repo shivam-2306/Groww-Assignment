@@ -1,7 +1,91 @@
 import React, { useEffect, useRef } from 'react';
 import './Confirmation.scss'; // Update this path to the location of your CSS file
 import { orderList, cInfo } from '../zustand';
-import phone from "../assets/phone.png";
+
+const Confirmed = () => {
+    return (
+        <div className="container-text">
+            <h1>Yay! your order has reached to us</h1>
+            <p>
+                <span className="magic">
+                    <span className="magic-star">
+                        <svg viewBox="0 0 512 512">
+                            <path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z" />
+                        </svg>
+                    </span>
+                    <span class="magic-star">
+                        <svg viewBox="0 0 512 512">
+                            <path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z" />
+                        </svg>
+                    </span>
+                    <span class="magic-star">
+                        <svg viewBox="0 0 512 512">
+                            <path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z" />
+                        </svg>
+                    </span>
+                    <span className="magic-text">Your order has been confirmed</span>
+                </span>. We are processing your order and will send you a confirmation email shortly.
+            </p>
+        </div>
+    )
+}
+
+const Failed = () => {
+    return (
+        <div className="container-text">
+            <h1>It looks like your payment was not processed</h1>
+            <p>
+                <span className="magic">
+                    <span className="magic-star">
+                        <svg viewBox="0 0 512 512">
+                            <path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z" />
+                        </svg>
+                    </span>
+                    <span class="magic-star">
+                        <svg viewBox="0 0 512 512">
+                            <path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z" />
+                        </svg>
+                    </span>
+                    <span class="magic-star">
+                        <svg viewBox="0 0 512 512">
+                            <path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z" />
+                        </svg>
+                    </span>
+                    <span className="magic-text">The payment process was a failure</span>
+                </span>. Any money deducted will be returned to you shortly. Sorry for the inconvinience.
+            </p>
+        </div>
+    )
+}
+
+const Pending = () => {
+    return (
+        <div className="container-text">
+            <h1>Your payment is being processed</h1>
+            <p>
+                <span className="magic">
+                    <span className="magic-star">
+                        <svg viewBox="0 0 512 512">
+                            <path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z" />
+                        </svg>
+                    </span>
+                    <span class="magic-star">
+                        <svg viewBox="0 0 512 512">
+                            <path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z" />
+                        </svg>
+                    </span>
+                    <span class="magic-star">
+                        <svg viewBox="0 0 512 512">
+                            <path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z" />
+                        </svg>
+                    </span>
+                    <span className="magic-text">It is taking longer than usual to complete your checkout</span>
+                </span>. We will send an email with the status shortly.
+            </p>
+        </div>
+    )
+}
+
 
 const ChatComponent = () => {
     useEffect(() => {
@@ -35,6 +119,25 @@ for(const star of document.getElementsByClassName("magic-star")) {
     }, []);
     const orderListData = orderList.getState();
     const imageUrls = orderListData.products.map((product) => product.image);
+    const result = Math.floor(Math.random() * (5)); 
+    console.log(result);
+
+    
+     let content;
+    switch (result) {
+        case 1:
+            content = <Confirmed />;
+            break;
+        case 2:
+            content = <Failed />;
+            break;
+        // ... cases for 2, 3, 4
+         case 3:
+            content = <Pending />;
+            break;
+        default:
+            content = <Pending />; // Default case if needed
+    }
 
     
     return (
@@ -97,29 +200,8 @@ for(const star of document.getElementsByClassName("magic-star")) {
                     </div>
                 </div>
             </div>
-            <div className="container-text">
-                <h1>Yay! your order has reached to us</h1>
-                <p>
-                        <span className="magic">
-                             <span className="magic-star">
-      <svg viewBox="0 0 512 512">
-      <path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z" />
-      </svg>
-    </span>
-    <span class="magic-star">
-      <svg viewBox="0 0 512 512">
-      <path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z" />
-      </svg>
-    </span>
-    <span class="magic-star">
-      <svg viewBox="0 0 512 512">
-      <path d="M512 255.1c0 11.34-7.406 20.86-18.44 23.64l-171.3 42.78l-42.78 171.1C276.7 504.6 267.2 512 255.9 512s-20.84-7.406-23.62-18.44l-42.66-171.2L18.47 279.6C7.406 276.8 0 267.3 0 255.1c0-11.34 7.406-20.83 18.44-23.61l171.2-42.78l42.78-171.1C235.2 7.406 244.7 0 256 0s20.84 7.406 23.62 18.44l42.78 171.2l171.2 42.78C504.6 235.2 512 244.6 512 255.1z" />
-      </svg>
-    </span>
-                            <span className = "magic-text">Your order has been confirmed</span>
-                        </span>. We are processing your order and will send you a confirmation email shortly.
-                </p>
-            </div>
+                <div>{content}</div>
+                
             </div>
             </div>
     );
