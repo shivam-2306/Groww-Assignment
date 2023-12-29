@@ -19,7 +19,6 @@
     font-family: 'Space Grotesk', sans-serif;
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
 }
 
   .attribution {
@@ -136,45 +135,41 @@ body {
 .card-container {
     display: flex;
     align-items: center;
+    .left-section {
+            width: 90%;
+            position: relative;
+            .input-cards {
+                    position: absolute;
+                    left: 65%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2rem;
+                    transform: translate(-50%, -40%);
+                    .front-card {
+                            position: relative;
+                            transform: translate(-100px);
+                            box-shadow: -1px 58px 400px -84px var(--primary);
+                            .card-logo {
+                                    position: absolute;
+                                    top: 1.7rem;
+                                    left: 1.7rem;
+                                }
+                    
+                        }
+            
+                }
+
+        }
+        .right-section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 }
 
 
 /* Left Section */
-
-.left-section {
-    width: 40%;
-    background-image: url(./assets/bg-main-desktop.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    position: relative;
-    min-height: 100vh;
-}
-
-.cards {
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    transform: translate(-50%, -50%);
-
-}
-
-.front-card {
-    position: relative;
-    transform: translate(-100px);
-    box-shadow: -1px 58px 400px -84px rgba(0, 0, 0, 0.75);
-
-}
-
-.card-logo {
-    position: absolute;
-    top: 1.7rem;
-    left: 1.7rem;
-}
-
 #number {
     position: absolute;
     color: var(--white);
@@ -195,7 +190,8 @@ body {
 
 .back-card {
     position: relative;
-    box-shadow: -1px 58px 400px -84px rgba(0, 0, 0, 0.75);
+    left: -30px;
+    box-shadow: -1px 58px 400px -84px var(--primary);
 }
 
 #cvc {
@@ -207,18 +203,70 @@ body {
 
 /* Right section */
 
-.right-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
+ .back-card,
+ .front-card,
+ .back-card img,
+ .front-card img {
+     width: 400px;
+ }
+
+ .card-logo {
+     width: 50px !important;
+ }
+
+ #number {
+     font-size: 1.1rem;
+     bottom: 4rem;
+ }
+
+ #cvc {
+     top: 43%;
+     right: 12%;
+ }
 
 form {
     display: grid;
     gap: 1em;
     width: 450px;
+    grid-template-columns: 1fr;
+    .grid-1,
+        .grid-2 {
+            display: grid;
+            grid: 1fr;
+            gap: 0.5em;
+            width: inherit;
+        }
+    
+        .card-information {
+            display: grid;
+            grid-template-columns: calc(50%) 1fr;
+            gap: 1.2em;
+            width: inherit;
+    
+            .grid-3, #card_date
+             {
+                display: grid;
+                grid-template-columns: 100%;
+                gap: 0.5em;
+    
+            }
+    
+            #card_date {
+                .two-inp {
+                    display: grid;
+                    grid-template-columns: calc(50%) 1fr;
+                    gap: 0.6em;
+                    .c-input{
+                        width: 70px;
+                    }
+                }
+            }
+    
+        }
+                                
+                               
 }
+ 
 
 form label {
     text-transform: uppercase;
@@ -227,41 +275,33 @@ form label {
     font-weight: 500;
 }
 
-form input {
+form .c-input {
     border: 1px solid var(--light-grayish-violet);
-    height: 2em;
+    height: 1em;
     border-radius: 8px;
-    width: 100%;
     font-size: 18px;
-    padding: 1.3em;
+    padding: 1em;
 }
 
-form input:focus {
+form .c-input:focus {
     outline-color: var(--blue);
 }
 
-form input::placeholder {
+form .c-input::placeholder {
     padding: 0.1em;
     font-size: 18px;
     color: var(--dark-grayish-violet);
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.c-input::-webkit-outer-spin-button,
+.c-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-.grid-1,
-.grid-2,
-.grid-3,
-#card_date {
-    display: grid;
-    grid: 1fr;
-    gap: 0.5em;
-}
 
-button {
+
+#submit-btn {
     background-color: var(--very-dark-violet);
     color: var(--white);
     font-size: 18px;
@@ -272,17 +312,9 @@ button {
     cursor: pointer;
 }
 
-.card-information {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.2em;
-}
 
-.two-inp {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6em;
-}
+
+
 
 /* Thank you section */
 
@@ -346,9 +378,9 @@ button {
         width: 290px;
     }
 
-    .cards {
+    .input-cards {
         left: 50%;
-        top: 50%;
+        top: 70%;
         gap: 2em;
     }
 }
@@ -379,10 +411,10 @@ button {
     .left-section {
         width: 100%;
         min-height: 30vh;
-        background-image: url(./assets/bg-main-mobile.png);
+        
     }
 
-    .cards {
+    .input-cards {
         flex-direction: column-reverse;
         left: 61%;
         top: 60%;

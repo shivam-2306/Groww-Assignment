@@ -5,7 +5,10 @@ import validator from "validator";
 import { currStep } from '../../zustand';
 import {motion} from "framer-motion"
 import visa from "./assets/visa.png"
+import cardBack from "./assets/cardBack.png"
+import cardFront from "./assets/cardFront.png"
 import { useNavigate } from 'react-router-dom';
+import cardLogo from "./assets/card-logo.svg"
 const CardDetails = () => {
   const navigate = useNavigate();
   // const [cardName, setCardName] = useState('');
@@ -227,15 +230,15 @@ const CardDetails = () => {
   return (
   
   <main>
-    <div class="card-container">
-      <div class="left-section">
-        <div class="cards">
-          <div class="front-card">
-            <img src="./assets/card-logo.svg" alt="card-logo" class="card-logo" />
-            <div class="card-container">
-              <img src="./assets/bg-card-front.png" alt="front-card" />
+    <div className="card-container">
+      <div className="left-section">
+        <div className="input-cards">
+          <div className="front-card">
+            <img src={cardLogo} alt="card-logo" className="card-logo" />
+            <div>
+              <img src={cardFront} alt="front-card"  />
               <h1 id="number">0000 0000 0000 0000</h1>
-              <div class="card-info">
+              <div className="card-info">
                 <span id="name">Jane Appleseed</span>
                 <span id="date">
                   <span id="month">01</span>
@@ -245,54 +248,89 @@ const CardDetails = () => {
               </div>
             </div>
           </div>
-          <div class="back-card">
-            <img src="./assets/bg-card-back.png" alt="back-card" />
+          <div className="back-card">
+            <img src={cardBack} alt="back-card" />
             <span id="cvc">000</span>
           </div>
         </div>
       </div>
-      <div class="right-section">
+      <div className="right-section">
         <form>
 
-          <div class="grid-1">
+          <div className="grid-1">
             <label>Cardholder name</label>
-            <input type="text" placeholder="e.g. Jane Appleseed" id="card_name" required />
+            <input className="c-input" type="text" placeholder="e.g. Jane Appleseed" id="card_name" required />
           </div>
 
-          <div class="grid-2">
+          <div className="grid-2">
             <label>Card number</label>
-            <input type="number"
-              oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              minlength="16" maxlength="16" placeholder="e.g. 1234 5678 9123 0000" id="card_number" required />
+            <input className="c-input" type="number"
+             onInput={(e) => {
+        if (e.target.value.length > e.target.maxLength) {
+            e.target.value = e.target.value.slice(0, e.target.maxLength);
+        }
+    }}
+    minLength={16} 
+    maxLength={16} 
+    placeholder="e.g. 1234 5678 9123 0000" 
+    id="card_number" 
+    required 
+/>
           </div>
 
-          <div class="card-information">
+          <div className="card-information">
             <div id="card_date">
-              <label for="card_date">Exp. Date (MM/YY)</label>
-              <div class="two-inp">
-                <div>
-                  <input type="number"
-                    oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                    placeholder="MM" minlength="2" maxlength="2" id="card_month" required />
+              <label htmlFor="card_date">Exp. Date (MM/YY)</label>
+              <div className="two-inp">
+                <div >
+                  <input className="c-input" type="number"
+                   onInput={(e) => {
+        if (e.target.value.length > e.target.maxLength) {
+            e.target.value = e.target.value.slice(0, e.target.maxLength);
+        }
+    }}
+    placeholder="MM" 
+    minLength={2} 
+    maxLength={2} 
+    id="card_month" 
+    required 
+/>
                 </div>
                 <div>
-                  <input type="number"
-                    oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                    minlength="2" maxlength="2" placeholder="YY" id="card_year" required />
+                  <input className="c-input" type="number"
+                     onInput={(e) => {
+        if (e.target.value.length > e.target.maxLength) {
+            e.target.value = e.target.value.slice(0, e.target.maxLength);
+        }
+    }}
+    minLength={2} 
+    maxLength={2} 
+    placeholder="YY" 
+    id="card_year" 
+    required 
+/>
                 </div>
               </div>
             </div>
 
-            <div class="grid-3">
-              <label for="card_cvc">CVC</label>
-              <input type="number"
-                oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                maxlength="3" placeholder="e.g. 123" id="card_cvc" required />
+            <div className="grid-3">
+              <label htmlFor="card_cvc">CVC</label>
+              <input className="c-input" type="number"
+                onInput={(e) => {
+        if (e.target.value.length > e.target.maxLength) {
+            e.target.value = e.target.value.slice(0, e.target.maxLength);
+        }
+    }}
+    maxLength={3} 
+    placeholder="e.g. 123" 
+    id="card_cvc" 
+    required 
+/>
             </div>
           </div>
           <button id="submit-btn" type="submit">Confirm</button>
         </form>
-        <div class="thank-you hidden">
+        <div className="thank-you hidden">
           <img alt="complete"/>
           <h1>Thank you!</h1>
           <p>We've added your card details</p>

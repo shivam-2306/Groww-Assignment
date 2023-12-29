@@ -40,7 +40,7 @@ $largeCircleSize: 40px; // Adjusted size for active circles
     background-color: #ccc; // Grey color for base line
     width: 100%;
     top: 50%;
-    margin-top: -1px;
+    margin-top: -13px;
 }
 
 .progress-line {
@@ -51,6 +51,7 @@ $largeCircleSize: 40px; // Adjusted size for active circles
     top: 0;
     transform: scaleX(0);
     transform-origin: left;
+    margin-top: -13px;
 }
 
 .step {
