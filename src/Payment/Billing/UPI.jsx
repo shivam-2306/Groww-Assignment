@@ -54,7 +54,7 @@ const UPI = () => {
     <div className="upi-container">
       <h3> Enter UPI Details</h3>
       {accordions.map((accordion) => (
-        <div key={accordion.id} className={`accordion ${accordion.isOpen ? 'open' : ''} ${accordion.isSelected ? 'selected' : ''}`}>
+        <div key={accordion.id} className={`accordion ${accordion.isOpen ? 'open' : ''} ${accordion.isSelected ? 'selected' : ''} glass`} >
           <div className="accordion-header" onClick={() => toggleAccordion(accordion.id)}>
             <img src = {accordion.imagePath}/>
             {accordion.platform}

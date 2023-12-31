@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
+$rccs-size: 400px;
+@import 'react-credit-cards-2/dist/lib/styles.scss';
 
 :root {
 
@@ -21,14 +23,14 @@
     margin: 0;
 }
 
-  .attribution {
-      font-size: 11px;
-      text-align: center;
-  }
+//   .attribution {
+//       font-size: 11px;
+//       text-align: center;
+//   }
 
-  .attribution a {
-      color: hsl(228, 45%, 44%);
-  }
+//   .attribution a {
+//       color: var(--primary);
+//   }
 
 
 
@@ -127,41 +129,31 @@
 
 /* structure */
 
-body {
-    min-height: 100vh;
-}
 
 
 .card-container {
     display: flex;
     align-items: center;
+    justify-content: space-around;
     .left-section {
-            width: 90%;
             position: relative;
             .input-cards {
-                    position: absolute;
-                    left: 65%;
+
                     display: flex;
                     flex-direction: column;
-                    gap: 2rem;
-                    transform: translate(-50%, -40%);
+                    
+                    
+                    box-shadow: 0px 58px 400px -95px var(--primary);
                     .front-card {
                             position: relative;
-                            transform: translate(-100px);
-                            box-shadow: -1px 58px 400px -84px var(--primary);
-                            .card-logo {
-                                    position: absolute;
-                                    top: 1.7rem;
-                                    left: 1.7rem;
-                                }
-                    
-                        }
-            
+                            transform: translateY(-8px);
+                            width: 400px;
+                        }       
+                        
                 }
 
         }
         .right-section {
-            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -188,11 +180,6 @@ body {
     right: 3rem;
 }
 
-.back-card {
-    position: relative;
-    left: -30px;
-    box-shadow: -1px 58px 400px -84px var(--primary);
-}
 
 #cvc {
     position: absolute;
@@ -202,17 +189,6 @@ body {
 }
 
 /* Right section */
-
- .back-card,
- .front-card,
- .back-card img,
- .front-card img {
-     width: 400px;
- }
-
- .card-logo {
-     width: 50px !important;
- }
 
  #number {
      font-size: 1.1rem;
@@ -271,12 +247,12 @@ form {
 form label {
     text-transform: uppercase;
     font-size: 15px;
-    color: var(--very-dark-violet);
+    color: var(--foreground);
     font-weight: 500;
 }
 
 form .c-input {
-    border: 1px solid var(--light-grayish-violet);
+    //border: 1px solid var(--light-grayish-violet);
     height: 1em;
     border-radius: 8px;
     font-size: 18px;
@@ -284,7 +260,7 @@ form .c-input {
 }
 
 form .c-input:focus {
-    outline-color: var(--blue);
+    outline-color: var(--primary);
 }
 
 form .c-input::placeholder {
@@ -388,7 +364,7 @@ form .c-input::placeholder {
 /* mobile version */
 
 @media screen and (max-width:750px) {
-    .container {
+        .card-container {
         flex-direction: column;
     }
 

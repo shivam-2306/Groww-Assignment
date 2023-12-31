@@ -241,7 +241,6 @@
             position: sticky;
             top: 20px;
             border: 1px solid rgb(255, 255, 255, 0.18);
-            box-shadow: 0 20px 16px 0 rgba(0, 179, 134, 0.2), 0 40px 40px 0 rgba(3, 99, 75, 0.19);
             flex:30%;
             display: flex;
             width: auto;
@@ -289,10 +288,10 @@
                     position: absolute;
                     top: -60%;
                     left: -40%;
-                    height: 200%;
+                    height: 150%;
                     width: 100%;
                     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2));
-                    transform: rotate(35deg);
+                    transform: rotate(45deg);
                     pointer-events: none;
                     filter: blur(5px);
                 }

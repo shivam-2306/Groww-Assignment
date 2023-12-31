@@ -6,8 +6,8 @@ body{
 }
 .p_wrapper {
     display: flex;
-    min-height: 100vh; // Set minimum height to 100% of the viewport height
     margin: 0;
+    align-items: center;
     padding: 0;
     background-color: var(--background-color);
 
@@ -19,7 +19,6 @@ body{
         height: 5vh;
     }
     .left {
-      flex: 70%;
       width: 100%;
     }
   
@@ -37,6 +36,7 @@ body{
       background-color: var(--background-color);
   
       .right__wrapper {
+        overflow: hidden;
         padding: 5px 10px;
         background: linear-gradient(var(--primary-lighter), var(--primary), var(--primary-darker));
         color: var(--primary-foreground); //add primary-color
@@ -52,8 +52,6 @@ body{
         justify-content: space-between;
         max-height: auto;
         border-radius: 20px;
-        box-shadow: 0 0 10px rgba(188, 245, 147, 0.8);
-  
         .mid__elements,
         .p_header {
           padding: 2px 2px;
@@ -74,11 +72,24 @@ body{
   
         hr {
           height: 1px;
-          background-color: #00b386;
+          background-color:var(--foreground);
           margin: 10px 60px;
           width: calc(100% - 120px);
         }
       }
+
+             .right__wrapper::before {
+               content: "";
+               position: absolute;
+               top: -60%;
+               left: -40%;
+               height: 150%;
+               width: 100%;
+               background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2));
+               transform: rotate(35deg);
+               pointer-events: none;
+               filter: blur(5px);
+             }
   
       button {
         background-color: #00b386;

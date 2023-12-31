@@ -1,21 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import './CardDetails.scss'
 import cardInfo from './cardInfo.json'
-import validator from "validator";
 import { currStep } from '../../zustand';
-import {motion} from "framer-motion"
-import visa from "./assets/visa.png"
-import cardBack from "./assets/cardBack.png"
-import cardFront from "./assets/cardFront.png"
 import { useNavigate } from 'react-router-dom';
-import cardLogo from "./assets/card-logo.svg"
+import Cards from "react-credit-cards-2";
+
+import {
+  formatCreditCardNumber,
+  formatCVC,
+  formatExpirationDate,
+  formatFormData,
+} from "./utils";
+
 const CardDetails = () => {
   const navigate = useNavigate();
-  // const [cardName, setCardName] = useState('');
-  //   const [cardNumber, setCardNumber] = useState('');
-  //   const [cardMonth, setCardMonth] = useState('');
-  //   const [cardYear, setCardYear] = useState('');
-  //   const [cardCVC, setCardCVC] = useState('');
+  const [state, setState] = useState({
+    number: '',
+    expiry: '',
+    cvc: '',
+    name: '',
+    focus: '',
+  });
+
+  const handleCallback = ({ issuer }, isValid) => {
+    if (isValid) {
+      this.setState({ issuer });
+    }
+  };
   // const [buttonsWithImages, setButtonsWithImages] = useState([]);
   //const [cardNumberError, setCardNumberError] = useState('');
 
@@ -204,54 +215,58 @@ const CardDetails = () => {
         form.style.display = 'none'
         thankYou.classList.remove("hidden")
       }
-    })  }, []);
+    })
+  }, []);
+
+   const handleInputChange = (evt) => {
+    const { name, value } = evt.target;
+    
+    setState((prev) => ({ ...prev, [name]: value }));
+  }
+
+  const handleInputFocus = (evt) => {
+    setState((prev) => ({ ...prev, focus: evt.target.name }));
+  }
   
-    const handleCardNameChange = (e) => {
-      setCardName(e.target.value.toUpperCase());
-    };
+  //  const handleInputChange = ({ target }) => {
+  //   if (target.name === "number") {
+  //     target.value = formatCreditCardNumber(target.value);
+  //   } else if (target.name === "expiry") {
+  //     target.value = formatExpirationDate(target.value);
+  //   } else if (target.name === "cvc") {
+  //     target.value = formatCVC(target.value);
+  //    }
 
-    const handleCardNumberChange = (e) => {
-      setCardNumber(e.target.value);
-    };
+  //   setState((prev) => ({ ...prev, [target.name]: target.value }));
+  // };
+   const handleSubmit = (e) => {
+    e.preventDefault();
+    const { issuer } = issuer.state;
+    const formData = [...e.target.elements]
+      .filter((d) => d.name)
+      .reduce((acc, d) => {
+        acc[d.name] = d.value;
+        return acc;
+      }, {});
 
-    const handleCardMonthChange = (e) => {
-      setCardMonth(e.target.value);
-    };
-
-    const handleCardYearChange = (e) => {
-      setCardYear(e.target.value);
-    };
-
-    const handleCardCVCChange = (e) => {
-      setCardCVC(e.target.value);
-    };
-
+    setState({ formData });
+    this.form.reset();
+  };
   
   return (
-  
-  <main>
     <div className="card-container">
       <div className="left-section">
         <div className="input-cards">
           <div className="front-card">
-            <img src={cardLogo} alt="card-logo" className="card-logo" />
-            <div>
-              <img src={cardFront} alt="front-card"  />
-              <h1 id="number">0000 0000 0000 0000</h1>
-              <div className="card-info">
-                <span id="name">Jane Appleseed</span>
-                <span id="date">
-                  <span id="month">01</span>
-                  /
-                  <span id="year">27</span>
-                </span>
-              </div>
+              <Cards className="front-card"
+            number={state.number}
+            name={state.name}
+            expiry={state.expiry}
+            cvc={state.cvc}
+            focused={state.focus}
+            // callback={handleCallback}
+            />
             </div>
-          </div>
-          <div className="back-card">
-            <img src={cardBack} alt="back-card" />
-            <span id="cvc">000</span>
-          </div>
         </div>
       </div>
       <div className="right-section">
@@ -259,12 +274,13 @@ const CardDetails = () => {
 
           <div className="grid-1">
             <label>Cardholder name</label>
-            <input className="c-input" type="text" placeholder="e.g. Jane Appleseed" id="card_name" required />
+            <input className="c-input glass" type="text" placeholder=" Jane Appleseed" id="card_name" required name="name" value={state.name} onChange={handleInputChange}
+                onFocus={handleInputFocus}/>
           </div>
 
           <div className="grid-2">
             <label>Card number</label>
-            <input className="c-input" type="number"
+            <input className="c-input glass" type="number" name="number" value={state.number}
              onInput={(e) => {
         if (e.target.value.length > e.target.maxLength) {
             e.target.value = e.target.value.slice(0, e.target.maxLength);
@@ -272,9 +288,11 @@ const CardDetails = () => {
     }}
     minLength={16} 
     maxLength={16} 
-    placeholder="e.g. 1234 5678 9123 0000" 
+    placeholder="1234 5678 9123 0000" 
     id="card_number" 
-    required 
+                required 
+                onChange={handleInputChange}
+                onFocus={handleInputFocus}
 />
           </div>
 
@@ -283,7 +301,7 @@ const CardDetails = () => {
               <label htmlFor="card_date">Exp. Date (MM/YY)</label>
               <div className="two-inp">
                 <div >
-                  <input className="c-input" type="number"
+                  <input className="c-input glass" type="number"
                    onInput={(e) => {
         if (e.target.value.length > e.target.maxLength) {
             e.target.value = e.target.value.slice(0, e.target.maxLength);
@@ -297,7 +315,7 @@ const CardDetails = () => {
 />
                 </div>
                 <div>
-                  <input className="c-input" type="number"
+                  <input className="c-input glass" type="number"
                      onInput={(e) => {
         if (e.target.value.length > e.target.maxLength) {
             e.target.value = e.target.value.slice(0, e.target.maxLength);
@@ -315,7 +333,8 @@ const CardDetails = () => {
 
             <div className="grid-3">
               <label htmlFor="card_cvc">CVC</label>
-              <input className="c-input" type="number"
+              <input className="c-input glass" type="number" name="cvc" value={state.cvc} onChange={handleInputChange}
+                onFocus={handleInputFocus}
                 onInput={(e) => {
         if (e.target.value.length > e.target.maxLength) {
             e.target.value = e.target.value.slice(0, e.target.maxLength);
@@ -338,7 +357,6 @@ const CardDetails = () => {
         </div>
       </div>
     </div>
-  </main>
  
     
   );

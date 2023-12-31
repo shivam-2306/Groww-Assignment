@@ -1,11 +1,11 @@
 .upi-container {
-    width: 80%;
-    color:#00b386;
+    width: 90%;
+    color:var(--foreground);
     margin:4rem;
   }
   
   .accordion {
-    border: 1px solid #00b386;
+    //border: 1px solid #00b386;
     margin-bottom: 30px;
     padding:10px 20px;
     border-radius: 20px;

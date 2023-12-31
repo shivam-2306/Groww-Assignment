@@ -37,6 +37,14 @@ const Left = () => {
     <div className="left__wrapper">
       <h2> Payment Method </h2>
       <div className="header__cards">
+        <div className="scroll-cards">
+          <section>
+            <h1>How would you like to pay?</h1>
+            <div className="scroll-container">
+              
+            </div>
+          </section>
+        </div>
         <div className={`payment__type ${selectedOption === 'upi' ? 'selected' : ''}`}>
           <input
             type="radio"

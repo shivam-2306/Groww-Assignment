@@ -17,8 +17,8 @@ $largeCircleSize: 40px; // Adjusted size for active circles
 .glass {
     background: linear-gradient(rgb(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     backdrop-filter: blur(10px);
-    //border: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    //box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 
 .line-wrapper {
