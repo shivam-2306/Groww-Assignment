@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import './Confirmation.scss'; // Update this path to the location of your CSS file
-import { orderList, cInfo } from '../zustand';
+import { orderList, cInfo, paymentInfo } from '../zustand';
+
 
 const Confirmed = () => {
     return (
@@ -117,6 +118,7 @@ for(const star of document.getElementsByClassName("magic-star")) {
   }, index++ * (interval / 3))
 }
     }, []);
+    const total = paymentInfo((state) => state.totalCost);
     const orderListData = orderList.getState();
     const imageUrls = orderListData.products.map((product) => product.image);
     const result = Math.floor(Math.random() * (5)); 
@@ -187,7 +189,7 @@ for(const star of document.getElementsByClassName("magic-star")) {
                         </div>
                         <div className="msg">
                             <div className="phone-chat-offer">
-                                Your total bill is<strong>$29</strong>
+                                Your total bill is<strong>{total}</strong>
                             </div>
                             <div className="phone-chat-offer">
                                 You paid via <strong>$49</strong>

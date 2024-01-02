@@ -22,3 +22,9 @@ const orderDetails = (set) => ({
 
 export const orderList = create(orderDetails);
 
+const paymentDetails = (set) => ({
+    totalCost: 0, paymentMethod: 'null'
+})
+
+export const paymentInfo = create(paymentDetails);
+

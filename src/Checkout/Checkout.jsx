@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios"
 import {motion} from 'framer-motion'
 import Search from "../assets/search-interface-symbol.png";
-import { currStep } from "../zustand";
+import { currStep, paymentInfo } from "../zustand";
 import { useNavigate } from "react-router-dom";
 import { orderList } from '../zustand'
 import chroma from "chroma-js";
@@ -101,7 +101,6 @@ const styles = getComputedStyle(root);
     if (orderListData.products) {
       // Set orderDetails to the value of orderListData
       setOrderDetails(orderListData);
-      console.log('this is stored'); console.table(orderListData)
     } else {
       // If it's empty, fetch data from the API
       const fetchOrderDetails = async () => {
@@ -113,7 +112,6 @@ const styles = getComputedStyle(root);
           // Set the fetched data to orderDetails
           setOrderDetails(response.data);
           orderList.setState(response.data);
-          console.log('this is set'); console.table(orderList.getState())
           
         } catch (error) {
           console.error("Error fetching order details:", error.message);
@@ -165,6 +163,8 @@ const styles = getComputedStyle(root);
     (count, product) => count + product.quantity,
     0
   );
+  
+  paymentInfo.setState({ totalCost: totalCost, paymentMethod: 'null' })
 
   const handleOnMouseMove = (e) => {
     for (const product of document.querySelectorAll('.productWrapper')) {

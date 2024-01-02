@@ -4,6 +4,7 @@ import './Payment.scss';
 import axios from 'axios';
 import {motion} from 'framer-motion'
 import Left from './Left';
+import {currStep} from '../zustand'
 
 const Payment = () => {
   const navigate = useNavigate();
@@ -39,6 +40,10 @@ const Payment = () => {
     setCurrentImageIndex(
       (prevIndex) => (prevIndex - 1 + productImages.length) % productImages.length
     );
+  };
+  const handleNavigation = () => {
+     currStep.setState({ Step: 'Confirmation' })
+    navigate('/chat')
   };
 
   return (
@@ -93,7 +98,7 @@ const Payment = () => {
             <h4>You Save: </h4>
             <span>$500</span>
           </div>
-          
+          <motion.button onClick={handleNavigation} whileHover={{scale:1.1}} whileTap={{scale:0.8}}> Confirm Payment </motion.button>
         </motion.div>
       </motion.div>
     </motion.div>
