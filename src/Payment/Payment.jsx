@@ -4,7 +4,8 @@ import './Payment.scss';
 import axios from 'axios';
 import {motion} from 'framer-motion'
 import Left from './Left';
-import {currStep} from '../zustand'
+import { currStep } from '../zustand'
+
 
 const Payment = () => {
   const navigate = useNavigate();

@@ -25,6 +25,7 @@ import React, { useState } from 'react';
 import './Left.scss';
 import CardDetails from './Billing/CardDetails';
 import UPI from './Billing/UPI';
+import Carousel from './carousel';
 
 const Left = () => {
   const [selectedOption, setSelectedOption] = useState('upi');
@@ -36,15 +37,9 @@ const Left = () => {
   return (
     <div className="left__wrapper">
       <h2> Payment Method </h2>
-      <div className="header__cards">
-        <div className="scroll-cards">
-          <section>
-            <h1>How would you like to pay?</h1>
-            <div className="scroll-container">
-              
-            </div>
-          </section>
-        </div>
+              <Carousel />
+      {/* <div className="header__cards">
+          
         <div className={`payment__type ${selectedOption === 'upi' ? 'selected' : ''}`}>
           <input
             type="radio"
@@ -66,15 +61,13 @@ const Left = () => {
           <label htmlFor="cardRadio">Card</label>
         </div>
       </div>
-      
-      {selectedOption === 'upi' && (
-        // Render content for UPI payment
+       */}
+        {/* // Render content for UPI payment */}
         <UPI/>
-      )}
-      {selectedOption === 'card' && (
+      {/* {selectedOption === 'card' && (
         // Render content for Card payment
         <CardDetails />
-      )}
+      )} */}
     </div>
   );
 };
