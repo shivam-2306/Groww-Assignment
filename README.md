@@ -9,7 +9,8 @@ Demo:
 Added transitions between pages to added smoothness to the transition process between each step
 Added the logo and brand name to top left corner for brand recognition, and the basic colors of app throughout the web pages (got them through ui)
 - Added a fun loader for users to not feel stuck during the loading process, especially when the traffic is high 
-Checkout Page
+
+## Checkout Page
 - Added a shopping cart type list where the user can still manipulate there cart if required
 - Added sections for phone and address if a user does not want to create an account but just wants to shop 
 - The order summary card is a stuck to the webpage so the user can directly jump to payment after checking their whole shopping list and doesnt need to jump to the top 
