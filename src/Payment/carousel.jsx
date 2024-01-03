@@ -1,6 +1,7 @@
 // Carousel.js
 import React, { useState, useEffect, useRef } from 'react';
 import './carousel.scss'; // Ensure you have a CSS file named Carousel.css
+import Cards from 'react-credit-cards-2'
 
 const Carousel = () => {
     /*--------------------
@@ -12,56 +13,77 @@ let active = 0
 	let isDown = false
 	const items = [
     {
-        title: "Paris",
-        num: "01",
-        imgSrc: "https://media.istockphoto.com/id/949299844/it/foto/vista-prospettica-dellesterno-delledificio-contemporaneo.jpg?s=612x612&w=0&k=20&c=_DR1aRHuTEV3EYBJo1ZXq1pF4SgwB9EVWQLaBj4sC5g="
+        name: "John Smith",
+        number: "**** **** **** 7048",
+        expiry: "10/20",
+        cvc: "737",
+        issuer: "visa"
     },
     {
-        title: "Warsaw",
-        num: "02",
-        imgSrc: "https://media.istockphoto.com/id/1150545984/it/foto/palazzo-moderno-di-lusso-con-piscina.jpg?s=612x612&w=0&k=20&c=Pbrai_VGc9tUviMCF1UaBErdS1YGyIVWsD29jzMZwTY="
+        name: "Emily Johnson",
+        number: "**** **** **** 1564",
+        expiry: "12/22",
+        cvc: "452",
+        issuer: "mastercard"
     },
     {
-        title: "Madrid",
-        num: "03",
-        imgSrc: "https://media.istockphoto.com/id/1214351345/it/foto/guardando-direttamente-lo-skyline-del-quartiere-finanziario-nel-centro-di-londra-immagine-di.jpg?s=612x612&w=0&k=20&c=oNNbPzPvcQ-4RA6AeatNIxHQIafBiXmDRtUUY0Ska-I="
+        name: "Michael Brown",
+        number: "**** **** **** 8945",
+        expiry: "11/23",
+        cvc: "369",
+        issuer: "amex"
     },
     {
-        title: "Sydney",
-        num: "04",
-        imgSrc: "https://media.istockphoto.com/id/904390980/it/foto/foto-di-architettura-contemporanea-astratta.jpg?s=612x612&w=0&k=20&c=_P4Wmx5nq5MeDuimpNklKCBlrLovmCyd9lfiMKeJZDs="
+        name: "Sarah Davis",
+        number: "**** **** **** 0021",
+        expiry: "07/24",
+        cvc: "781",
+        issuer: "visa"
     },
     {
-        title: "Istanbul",
-        num: "05",
-        imgSrc: "https://media.istockphoto.com/id/130408311/it/foto/piscina-allesterno-della-casa-moderna-al-crepuscolo.jpg?s=612x612&w=0&k=20&c=ZoVjx7uDjoHKmpM1ayW6UR1SQOoYh_xx-QMG_qeOYs0="
+        name: "William Wilson",
+        number: "**** **** **** 6789",
+        expiry: "08/21",
+        cvc: "834",
+        issuer: "discover"
     },
     {
-        title: "Prague",
-        num: "06",
-        imgSrc: "https://media.istockphoto.com/id/1299954175/it/foto/villa-cubica-moderna.jpg?s=612x612&w=0&k=20&c=DhGhb3c1E3DW_fbrWJ_R_Zh0Lbwu6syFeRLsKlZ9no8="
+        name: "Jessica Miller",
+        number: "**** **** **** 5432",
+        expiry: "05/22",
+        cvc: "442",
+        issuer: "mastercard"
     },
     {
-        title: "Munich",
-        num: "07",
-        imgSrc: "https://media.istockphoto.com/id/926689776/it/foto/vista-ad-angolo-basso-dei-grattacieli-di-new-york.jpg?s=612x612&w=0&k=20&c=DmEB0Ty7ZwDnBoU5SuA8FNevOp4G1UcECw5aS4vA9A8="
-    },
-    {
-        title: "Venice",
-        num: "08",
-        imgSrc: "https://media.istockphoto.com/id/1191376167/it/foto/villa-dellisola.jpg?s=612x612&w=0&k=20&c=PKslWo4FdbjinohKQlK_oWL34jqAsnzMTdy2bxEAf-I="
-    },
-    {
-        title: "Oslo",
-        num: "09",
-        imgSrc: "https://media.istockphoto.com/id/184316397/it/foto/londra-edifici-aziendali.jpg?s=612x612&w=0&k=20&c=XqrRxEPzFnwRFk7PQrCiu9-FPfCTPyMe5BKKaxYXCs8="
-    },
-    {
-        title: "London",
-        num: "10",
-        imgSrc: "https://media.istockphoto.com/id/184619832/it/foto/distretto-finanziario-al-crepuscolo-londra.jpg?s=612x612&w=0&k=20&c=RAThrJOBY6vhlT6-kQpu9-9jLEzWToYfdw46S8B0Mu0="
+        name: "David Anderson",
+        number: "**** **** **** 9087",
+        expiry: "02/23",
+        cvc: "764",
+        issuer: "visa"
+		},
+	{
+        name: "David Anderson",
+        number: "**** **** **** 9087",
+        expiry: "02/23",
+        cvc: "764",
+        issuer: "visa"
+		},
+	{
+        name: "David Anderson",
+        number: "**** **** **** 9087",
+        expiry: "02/23",
+        cvc: "764",
+        issuer: "visa"
+		},
+	{
+        name: "David Anderson",
+        number: "**** **** **** 9087",
+        expiry: "02/23",
+        cvc: "764",
+        issuer: "visa"
     }
 ];
+
 
 	const itemRefs = useRef(items.map(() => React.createRef()));
 	
@@ -147,9 +169,14 @@ const handleMouseUp = () => {
     {items.map((item, index) => (
         <div className="carousel-item" ref={itemRefs.current[index]} key={index} onClick={handleClick(index)} >
             <div className="carousel-box">
-                <div className="title">{item.title}</div>
-                <div className="num">{item.num}</div>
-                <img src={item.imgSrc} alt={item.title} />
+                 <Cards
+            name={item.name}
+            number={item.number}
+            expiry={item.expiry}
+            cvc={item.cvc}
+            preview={true}
+            issuer={item.issuer}
+          />
             </div>
         </div>
     ))}

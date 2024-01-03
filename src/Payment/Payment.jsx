@@ -99,7 +99,7 @@ const Payment = () => {
             <h4>You Save: </h4>
             <span>$500</span>
           </div>
-          <motion.button onClick={handleNavigation} whileHover={{scale:1.1}} whileTap={{scale:0.8}}> Confirm Payment </motion.button>
+          <motion.button onClick={handleNavigation} whileHover={{rotate: 6}} whileTap={{scale:0.8}}> Confirm Payment </motion.button>
         </motion.div>
       </motion.div>
     </motion.div>

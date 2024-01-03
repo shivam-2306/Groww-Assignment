@@ -1,9 +1,9 @@
-$rccs-size: 290px; 
+$rccs-size: 350px; 
 @import 'react-credit-cards-2/dist/lib/styles.scss';
 .carousel {
     position: relative;
     z-index: 1;
-    height: 30vh;
+    min-height: 50vh;
     overflow: hidden;
     pointer-events: none;
 }
