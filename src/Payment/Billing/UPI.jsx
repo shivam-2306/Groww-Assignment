@@ -1,5 +1,6 @@
 import React, { useState , useEffect} from 'react';
 import './UPI.scss';
+import { paymentInfo } from '../../zustand';
 
 const UPI = () => {
   const [accordions, setAccordions] = useState([
@@ -7,6 +8,11 @@ const UPI = () => {
     { id: 2, platform: 'PayTM', isOpen: false, upiId: '' },
     { id: 3, platform: 'PayPal', isOpen: false, upiId: '' },
   ]);
+
+  const isValidUPI = (upiId) => {
+    const regex= "^[0-9A-Za-z.-]{2,256}@[A-Za-z]{2,64}$"
+    return regex.test(upiId);
+  };
 
   const toggleAccordion = (id) => {
     setAccordions((prevAccordions) =>
@@ -17,14 +23,25 @@ const UPI = () => {
       }))
     );
   };
+
+   const setPaymentMethod = (method) => {
+     paymentInfo.setState({ paymentMethod: method });
+     console,log(paymentInfo.getState().paymentMethod);
+  }
   
 
   const handleInputChange = (id, upiId) => {
+    const isValid = isValidUPI(upiId);
     setAccordions((prevAccordions) =>
       prevAccordions.map((accordion) =>
         accordion.id === id ? { ...accordion, upiId: upiId } : accordion
       )
     );
+    console.log(upiId);
+    if (isValid) {
+      // Update the payment method in Zustand store
+      setPaymentMethod({ platform: accordions.find(a => a.id === id).platform, upiId: upiId });
+    }
   };
   const getImagePath = async (platform) => {
     try {

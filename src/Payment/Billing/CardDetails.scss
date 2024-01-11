@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
-$rccs-size: 400px;
-@import 'react-credit-cards-2/dist/lib/styles.scss';
-
 :root {
 
     --Linear-gradient: hsl(249, 99%, 64%) to hsl(278, 94%, 30%);
@@ -21,6 +18,8 @@ $rccs-size: 400px;
     font-family: 'Space Grotesk', sans-serif;
     padding: 0;
     margin: 0;
+    $rccs-size: 400px;
+    @import 'react-credit-cards-2/dist/lib/styles.scss';
 }
 
 //   .attribution {

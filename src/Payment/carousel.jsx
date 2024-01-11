@@ -1,24 +1,15 @@
 // Carousel.js
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useAnimate } from 'react';
 import './carousel.scss'; // Ensure you have a CSS file named Carousel.css
 import Cards from 'react-credit-cards-2'
+import { paymentInfo } from '../zustand';
 
-const Carousel = () => {
-    /*--------------------
-Vars
---------------------*/
+const Carousel = ({onOpenModal}) => {
 let progress = 50
 let startX = 0
 let active = 0
 	let isDown = false
 	const items = [
-    {
-        name: "John Smith",
-        number: "**** **** **** 7048",
-        expiry: "10/20",
-        cvc: "737",
-        issuer: "visa"
-    },
     {
         name: "Emily Johnson",
         number: "**** **** **** 1564",
@@ -31,14 +22,14 @@ let active = 0
         number: "**** **** **** 8945",
         expiry: "11/23",
         cvc: "369",
-        issuer: "amex"
+        issuer: "americanexpress"
     },
     {
         name: "Sarah Davis",
         number: "**** **** **** 0021",
         expiry: "07/24",
         cvc: "781",
-        issuer: "visa"
+        issuer: "elo"
     },
     {
         name: "William Wilson",
@@ -52,35 +43,41 @@ let active = 0
         number: "**** **** **** 5432",
         expiry: "05/22",
         cvc: "442",
-        issuer: "mastercard"
+        issuer: "dinersclub"
     },
-    {
-        name: "David Anderson",
-        number: "**** **** **** 9087",
+		{
+			name: "David Anderson",
+			number: "**** **** **** 9087",
+			expiry: "02/23",
+			cvc: "764",
+			issuer: "visa"
+		},
+	{
+        name: "Shivam Chaturvedi",
+        number: "**** **** **** 8500",
+        expiry: "02/23",
+        cvc: "764",
+        issuer: "hipercard"
+		},
+	{
+        name: "Krishan Kumar",
+        number: "**** **** **** 1563",
         expiry: "02/23",
         cvc: "764",
         issuer: "visa"
 		},
 	{
-        name: "David Anderson",
-        number: "**** **** **** 9087",
+        name: "Priyank Sinha",
+        number: "**** **** **** 4098",
         expiry: "02/23",
         cvc: "764",
-        issuer: "visa"
-		},
-	{
-        name: "David Anderson",
-        number: "**** **** **** 9087",
+        issuer: "elo"
+    },
+  { name: "Priyank Sinha",
+        number: "**** **** **** 4098",
         expiry: "02/23",
         cvc: "764",
-        issuer: "visa"
-		},
-	{
-        name: "David Anderson",
-        number: "**** **** **** 9087",
-        expiry: "02/23",
-        cvc: "764",
-        issuer: "visa"
+        issuer: "elo"
     }
 ];
 
@@ -92,16 +89,20 @@ let active = 0
 	const getZindex = (array, index) => (array.map((_, i) => (index === i) ? array.length : array.length - Math.abs(index - i)))
 
 
-	const displayItems = (item, index, active) => {
-	if($items){
-  const zIndex = getZindex([...$items], active)[index]
+  const displayItems = (item, index, active) => {
+    console.log("Processing index:", index);
+	if($items && item){
+    const zIndex = getZindex([...$items], active)[index]
+    const act = (index - active) / $items.length
   item.style.setProperty('--zIndex', zIndex)
-  item.style.setProperty('--active', (index-active)/$items.length)}
+    item.style.setProperty('--active', act)
+		// item.style.setProperty('--items', $items.length)
+	} 
 	}
 	const animate = () => {
 		progress = Math.max(0, Math.min(progress, 100))
 		if ($items) {
-			active = Math.floor(progress / 100 * (items.length - 1))
+			active = Math.floor(progress / 100 * ($items.length - 1))
   
 			$items.forEach((item, index) => displayItems(item, index, active))
 		}
@@ -154,7 +155,7 @@ const handleMouseUp = () => {
 	 useEffect(() => {
         $items = itemRefs.current.map(ref => ref.current);
 		animate()
-    }, [itemRefs]);
+    }, [itemRefs, animate]);
 
 
 	return (
@@ -166,20 +167,22 @@ const handleMouseUp = () => {
             onTouchMove={handleMouseMove}
             onTouchEnd={handleMouseUp}>
 			<div className="carousel">
-    {items.map((item, index) => (
-        <div className="carousel-item" ref={itemRefs.current[index]} key={index} onClick={handleClick(index)} >
-            <div className="carousel-box">
-                 <Cards
-            name={item.name}
-            number={item.number}
-            expiry={item.expiry}
-            cvc={item.cvc}
-            preview={true}
-            issuer={item.issuer}
-          />
-            </div>
-        </div>
-    ))}
+        {items.map((item, index) => {
+          const isLast = index === items.length - 1;
+          return (<div className="carousel-item" ref={itemRefs.current[index]} key={index} onClick={() => handleClick(index)} >
+            {!isLast? (<div className="carousel-box">
+              <Cards
+                name={item.name}
+                number={item.number}
+                expiry={item.expiry}
+                cvc={item.cvc}
+                preview={true}
+                issuer={item.issuer}
+              />
+            </div>) : (<div className="carousel-box" onClick={onOpenModal}> add a card</div>)}
+          </div>)
+        })}
+        
 </div>
 
 <div className="cursor"></div>

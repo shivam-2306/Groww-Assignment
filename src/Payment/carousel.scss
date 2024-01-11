@@ -3,7 +3,7 @@ $rccs-size: 350px;
 .carousel {
     position: relative;
     z-index: 1;
-    min-height: 50vh;
+    min-height: 35vh;
     overflow: hidden;
     pointer-events: none;
 }
@@ -13,9 +13,8 @@ $rccs-size: 350px;
     --width: 290px;
     --height: clamp(200px, 40vw, 150px);
     --x: calc(var(--active) * 800%);
-    --y: calc(var(--active) * 200%);
     --rot: calc(var(--active) * 120deg);
-    --opacity: calc(var(--zIndex) / var(--items) * 3 - 2);
+    --opacity: calc(var(--zIndex) / var(--items) * 4 - 3);
     overflow: hidden;
     position: absolute;
     z-index: var(--zIndex);
@@ -26,7 +25,6 @@ $rccs-size: 350px;
     top: 50%;
     left: 50%;
     user-select: none;
-    transform-origin: 0% 100%;
     background: var(--background-color);
     pointer-events: all;
     transform: translate(var(--x)) rotate(var(--rot));

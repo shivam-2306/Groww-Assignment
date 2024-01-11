@@ -5,6 +5,7 @@ import axios from 'axios';
 import {motion} from 'framer-motion'
 import Left from './Left';
 import { currStep } from '../zustand'
+import { paymentInfo } from '../zustand';
 
 
 const Payment = () => {
@@ -12,6 +13,9 @@ const Payment = () => {
   const [isExpanded, setExpanded] = useState(false);
   const [productImages, setProductImages] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [totalCost, setTotalCost] = useState(0);
+  const [tax, setTax] = useState(0);
+  const [total, setTotal] = useState(0);
   
   const toggleExpand = () => {
     setExpanded(!isExpanded);
@@ -20,6 +24,10 @@ const Payment = () => {
  const back = '<';
   useEffect(() => {
     const fetchProductImages = async () => {
+      setTotalCost(paymentInfo.getState().totalCost);
+      setTax(((5 / 100 * totalCost).toFixed(2)));
+      setTotal(((Number(totalCost) + Number(tax) - 50).toFixed(2)));
+      paymentInfo.setState({ totalCost: total });
       try {
         const response = await axios.get(
           'https://groww-intern-assignment.vercel.app/v1/api/order-details'
@@ -46,6 +54,7 @@ const Payment = () => {
      currStep.setState({ Step: 'Confirmation' })
     navigate('/chat')
   };
+
 
   return (
     <motion.div className="p_wrapper">
@@ -75,7 +84,7 @@ const Payment = () => {
 
           <div className="mid__elements">
             <h4>Item Subtotal: </h4>
-            <span>$4445</span>
+            <span>{ totalCost}</span>
           </div>
 
           <div className="mid__elements">
@@ -85,19 +94,19 @@ const Payment = () => {
 
           <div className="mid__elements">
             <h4>Tax Value: </h4>
-            <span>$55</span>
+            <span>{tax}</span>
           </div>
 
           <hr />
 
           <div className="mid__elements">
             <h4>Total: </h4>
-            <span>$4500</span>
+            <span>{total}</span>
           </div>
 
           <div className="mid__elements">
             <h4>You Save: </h4>
-            <span>$500</span>
+            <span>$50</span>
           </div>
           <motion.button onClick={handleNavigation} whileHover={{rotate: 6}} whileTap={{scale:0.8}}> Confirm Payment </motion.button>
         </motion.div>

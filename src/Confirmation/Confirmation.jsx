@@ -119,6 +119,7 @@ for(const star of document.getElementsByClassName("magic-star")) {
 }
     }, []);
     const total = paymentInfo((state) => state.totalCost);
+    const payment = paymentInfo((state) => state.paymentMethod.platform);
     const orderListData = orderList.getState();
     const imageUrls = orderListData.products.map((product) => product.image);
     const result = Math.floor(Math.random() * (5)); 
@@ -192,7 +193,7 @@ for(const star of document.getElementsByClassName("magic-star")) {
                                 Your total bill is<strong>{total}</strong>
                             </div>
                             <div className="phone-chat-offer">
-                                You paid via <strong>$49</strong>
+                                    You paid via <strong>{ payment}</strong>
                             </div>
                         </div>
                     </div>

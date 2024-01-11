@@ -23,9 +23,10 @@
 
 import React, { useState } from 'react';
 import './Left.scss';
-import CardDetails from './Billing/CardDetails';
 import UPI from './Billing/UPI';
 import Carousel from './carousel';
+import CardDetails from './Billing/CardDetails';
+import { paymentInfo } from '../zustand';
 
 const Left = () => {
   const [selectedOption, setSelectedOption] = useState('upi');
@@ -34,11 +35,33 @@ const Left = () => {
     setSelectedOption(option);
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
   return (
     <div className="left__wrapper">
       <h2> Payment Method </h2>
-              <Carousel />
-      {/* <div className="header__cards">
+       {isModalOpen ? (
+                <div>
+          <CardDetails />
+                    <button onClick={handleCloseModal}>Close Modal</button>
+                </div>
+            ) : (
+          <div>
+            <Carousel onOpenModal={handleOpenModal} />
+               <UPI/>
+                </div>
+            )}
+      {/* <h2> Payment Method </h2>
+              <Carousel onOpenModal={handleOpenModal}/>
+      <div className="header__cards">
           
         <div className={`payment__type ${selectedOption === 'upi' ? 'selected' : ''}`}>
           <input
@@ -61,10 +84,10 @@ const Left = () => {
           <label htmlFor="cardRadio">Card</label>
         </div>
       </div>
-       */}
-        {/* // Render content for UPI payment */}
+      
+        // Render content for UPI payment
         <UPI/>
-      {/* {selectedOption === 'card' && (
+      {selectedOption === 'card' && (
         // Render content for Card payment
         <CardDetails />
       )} */}

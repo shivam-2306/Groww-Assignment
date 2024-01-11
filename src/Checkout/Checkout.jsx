@@ -164,7 +164,7 @@ const styles = getComputedStyle(root);
     0
   );
   
-  paymentInfo.setState({ totalCost: totalCost, paymentMethod: 'null' })
+  paymentInfo.setState({ totalCost: (totalCost + 5.99).toFixed(2), paymentMethod: 'null' })
 
   const handleOnMouseMove = (e) => {
     for (const product of document.querySelectorAll('.productWrapper')) {
