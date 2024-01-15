@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './cInfo/cInfo';
 import Payment from './Payment/Payment';
 import ChatComponent from './Confirmation/Confirmation';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -63,6 +64,7 @@ function App() {
   return (
     <Router>
       <div className="background">
+        <Analytics/>
         {/* ProgressBar and CInfo components always stay on top */}
         {!isLoading && <div>
        <Header />
