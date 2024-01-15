@@ -184,9 +184,6 @@ const handleMouseUp = () => {
         })}
         
 </div>
-
-<div className="cursor"></div>
-	<div className="cursor cursor2"></div>
 </div>
     );
 };

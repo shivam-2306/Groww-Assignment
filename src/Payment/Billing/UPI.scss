@@ -1,15 +1,149 @@
+@keyframes animate{
+  0%, 100%{
+    transform: translateY(10px);
+  }
+  50%{
+    transform: translateY(-10px);
+  }
+}
+
 .upi-container {
     width: 90%;
     color:var(--foreground);
     margin:4rem;
-  }
+    .accordion {
+        position: relative;
+        .acc-background{
+          position: relative;
+          margin: 30px 0px;
+          padding: 10px 20px;
+          border-radius: 20px;
+          background: rgba(255, 255, 255, 0.05);
+          backdrop-filter: blur(10px);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          z-index: 1;
+        }
+
+        // &:nth-child(2) {
+        
+        //     &::before,
+        //     &::after {
+        //       background: linear-gradient(90deg, #4285F4,#DB4437, #F4B400, #0F9D58);
+        //     }
+        //   }
+        //   &:nth-child(3) {
+        
+        //     &::before,
+        //     &::after {
+        //       background: linear-gradient(90deg, var(--primary), var(--violet));
+        //     }
+        //   }
+        //   &:nth-child(4) {
+        
+        //     &::before,
+        //     &::after {
+        //       background: linear-gradient(90deg, var(--), var(--violet));
+        //     }
+        //   }
+      }
+            .accordion::before {
+              content: ' ';
+              position: absolute;
+              top: -10px;
+              left: 50px;
+              height: 120%;
+              width: 50%;
+              text-decoration: none;
+              //background: ;
+              border-radius: 20px;
+              transform: skewX(30deg);
+              transition: 0.5s;
+            }
+      
+            .accordion::after {
+              content: ' ';
+              position: absolute;
+              top: 0px;
+              left: 50px;
+              height: 120%;
+              width: 50%;
+              text-decoration: none;
+              //background: white;
+              border-radius: 20px;
+              transform: skewX(30deg);
+              transition: 0.5s;
+              filter: blur(30px);
+            }
+      
+            .accordion:hover::before,
+            .accordion:hover::after {
+              transform: skewX(0deg);
+              left: 20px;
+              width: calc(100% - 90px);
+            }
+
+            span{
+              display: block; 
+              position: absolute; 
+              top: 0; 
+              left: 0;
+              right: 0;
+              bottom: 0;
+              z-index: 3; 
+              pointer-events: none;
+            }
+      
+             span::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              width:0;
+              height: 0;
+              border-radius: 8px; 
+              background: rgba(255, 255, 255, 0.1);
+              backdrop-filter: blur(10px);
+              opacity: 0; 
+              transition: 0.5s; 
+              animation: animate 2s ease-in-out infinite;
+              box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.08);
+            }
+            span::after{
+              content: '';
+              position: absolute;
+              bottom: 0;
+              right: 0;
+              width:0;
+              height: 0;
+              border-radius: 8px; 
+              background: rgba(255, 255, 255, 0.1);
+              backdrop-filter: blur(10px);
+              opacity: 0; 
+              transition: 0.5s; 
+              animation: animate 2s ease-in-out infinite;
+              box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.08);
+              animation-delay: -1s;
+            }
+          }
+          .accordion:hover span::before {
+              top: -30px;
+              left: 50px;
+                width: 50px;
+                height: 50px;
+                opacity: 1;
+                         
+            }
+
+            .accordion:hover span::after {
+              bottom: -30px;
+              right: 50px;
+                width: 50px;
+                height: 50px;
+                opacity: 1;
+                         
+            }
+
   
-  .accordion {
-    //border: 1px solid #00b386;
-    margin-bottom: 30px;
-    padding:10px 20px;
-    border-radius: 20px;
-  }
   
   .accordion-header {
     padding: 10px;

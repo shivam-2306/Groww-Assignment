@@ -270,6 +270,7 @@ const CardDetails = () => {
         </div>
       </div>
       <div className="right-section">
+        <div className="drop"></div>
         <form>
 
           <div className="grid-1">

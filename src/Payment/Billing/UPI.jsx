@@ -71,7 +71,10 @@ const UPI = () => {
     <div className="upi-container">
       <h3> Enter UPI Details</h3>
       {accordions.map((accordion) => (
-        <div key={accordion.id} className={`accordion ${accordion.isOpen ? 'open' : ''} ${accordion.isSelected ? 'selected' : ''} glass`} >
+
+          <div key={accordion.id} className={`accordion ${accordion.isOpen ? 'open' : ''} ${accordion.isSelected ? 'selected' : ''}`} >
+             <span></span>
+          <div className="acc-background">
           <div className="accordion-header" onClick={() => toggleAccordion(accordion.id)}>
             <img src = {accordion.imagePath}/>
             {accordion.platform}
@@ -84,9 +87,10 @@ const UPI = () => {
                 value={accordion.upiId}
                 onChange={(e) => handleInputChange(accordion.id, e.target.value)}
               />
-            </div>
+              </div>
           )}
-        </div>
+          </div>
+          </div>
       ))}
     </div>
   );
