@@ -1,5 +1,5 @@
 import React from 'react';
-import './ProgressBar.scss';
+import './progressBar.scss';
 import { motion } from 'framer-motion';
 import { currStep } from '../zustand'
 import { IonIcon } from '@ionic/react';
