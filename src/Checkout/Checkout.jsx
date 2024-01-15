@@ -26,7 +26,6 @@ const styles = getComputedStyle(root);
   if (primaryColor) {
     primaryColor = chroma(primaryColor);
     let LighterColor = primaryColor.brighten(1).css(); // slightly brighter
-    console.log('light'+ LighterColor)//let muchLighterColor = primaryColor.brighten(3).css(); // much brighter
     let DarkerColor = primaryColor.darken(1).css(); // slightly darker
     //let muchDarkerColor = primaryColor.darken(3).css();
     // Set new shades as CSS variables

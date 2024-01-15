@@ -90,7 +90,6 @@ let active = 0
 
 
   const displayItems = (item, index, active) => {
-    console.log("Processing index:", index);
 	if($items && item){
     const zIndex = getZindex([...$items], active)[index]
     const act = (index - active) / $items.length

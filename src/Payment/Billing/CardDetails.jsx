@@ -298,7 +298,7 @@ const CardDetails = () => {
           </div>
 
           <div className="card-information">
-            <div id="card_date">
+            {/* <div id="card_date">
               <label htmlFor="card_date">Exp. Date (MM/YY)</label>
               <div className="two-inp">
                 <div >
@@ -330,8 +330,40 @@ const CardDetails = () => {
 />
                 </div>
               </div>
-            </div>
-
+            </div> */}
+              {/* <div id="card_date">
+    <label htmlFor="card_date">Exp. Date (MM/YY)</label>
+    <div>
+        <input className="c-input glass" type="text" 
+            onChange={handleInputChange}
+                onFocus={handleInputFocus}
+                onInput={(e) => {
+        if (e.target.value.length > e.target.maxLength) {
+            e.target.value = e.target.value.slice(0, e.target.maxLength);
+        }
+    }}
+            placeholder="MM/YY" 
+            id="card_expiry" 
+            name='expiry'
+            value={state.expiry}
+            maxLength={5} 
+            required 
+        />
+    </div>
+</div> */} <div className = "grid-3">
+              <label htmlFor="card_date">Exp date</label>
+              <input className="c-input glass" type="text" name="expiry" value={state.expiry} onChange={handleInputChange}
+                onFocus={handleInputFocus}
+                onInput={(e) => {
+        if (e.target.value.length > e.target.maxLength) {
+            e.target.value = e.target.value.slice(0, e.target.maxLength);
+        }
+    }}
+    maxLength={5} 
+    placeholder="MM/YY" 
+    id="card_expiry" 
+    required 
+              /> </div>
             <div className="grid-3">
               <label htmlFor="card_cvc">CVC</label>
               <input className="c-input glass" type="number" name="cvc" value={state.cvc} onChange={handleInputChange}
@@ -345,8 +377,7 @@ const CardDetails = () => {
     placeholder="e.g. 123" 
     id="card_cvc" 
     required 
-/>
-            </div>
+/></div>
           </div>
           <button id="submit-btn" type="submit">Confirm</button>
         </form>

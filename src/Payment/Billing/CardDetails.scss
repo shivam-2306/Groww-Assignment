@@ -205,37 +205,18 @@ form {
     width: 450px;
     grid-template-columns: 1fr;
     .grid-1,
-        .grid-2 {
+        .grid-2, .grid-3{
             display: grid;
             grid: 1fr;
             gap: 0.5em;
-            width: inherit;
+
         }
     
         .card-information {
             display: grid;
-            grid-template-columns: calc(50%) 1fr;
+            grid-template-columns: calc(50% - 0.6em) calc(50% - 0.6em);
             gap: 1.2em;
             width: inherit;
-    
-            .grid-3, #card_date
-             {
-                display: grid;
-                grid-template-columns: 100%;
-                gap: 0.5em;
-    
-            }
-    
-            #card_date {
-                .two-inp {
-                    display: grid;
-                    grid-template-columns: calc(50%) 1fr;
-                    gap: 0.6em;
-                    .c-input{
-                        width: 70px;
-                    }
-                }
-            }
     
         }
                                 
@@ -255,7 +236,7 @@ form .c-input {
     height: 1em;
     border-radius: 8px;
     font-size: 18px;
-    padding: 1em;
+    padding: 1em 0em 1em 1em;
 }
 
 form .c-input:focus {

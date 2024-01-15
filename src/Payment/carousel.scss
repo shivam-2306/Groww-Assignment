@@ -10,7 +10,7 @@ $rccs-size: 350px;
 
 .carousel-item {
     --items: 10;
-    --width: 200px;
+    --width: 350px;
     --height: calc(350px/1.5858);
     --x: calc(var(--active) * 800%);
     --rot: calc(var(--active) * 120deg);

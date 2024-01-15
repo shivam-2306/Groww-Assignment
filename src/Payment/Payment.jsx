@@ -24,10 +24,6 @@ const Payment = () => {
  const back = '<';
   useEffect(() => {
     const fetchProductImages = async () => {
-      setTotalCost(paymentInfo.getState().totalCost);
-      setTax(((5 / 100 * totalCost).toFixed(2)));
-      setTotal(((Number(totalCost) + Number(tax) - 50).toFixed(2)));
-      paymentInfo.setState({ totalCost: total });
       try {
         const response = await axios.get(
           'https://groww-intern-assignment.vercel.app/v1/api/order-details'
@@ -40,6 +36,19 @@ const Payment = () => {
 
     fetchProductImages();
   }, []);
+
+  useEffect(() => {
+    const newTotalCost = paymentInfo.getState().totalCost;
+    const newTax = (5 / 100 * newTotalCost).toFixed(2);
+    const newTotal = (Number(newTotalCost) + Number(newTax) - 50).toFixed(2);
+
+    setTotalCost(newTotalCost);
+    setTax(newTax);
+    setTotal(newTotal);
+
+    // Update the total cost in zustand state
+    paymentInfo.setState({ totalCost: newTotal });
+  }, []); 
 
   const handleNextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % productImages.length);
@@ -84,7 +93,7 @@ const Payment = () => {
 
           <div className="mid__elements">
             <h4>Item Subtotal: </h4>
-            <span>{ totalCost}</span>
+            <span>{totalCost}</span>
           </div>
 
           <div className="mid__elements">
